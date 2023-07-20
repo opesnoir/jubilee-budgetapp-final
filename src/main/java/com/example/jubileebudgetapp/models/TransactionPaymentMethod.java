@@ -1,6 +1,6 @@
 package com.example.jubileebudgetapp.models;
 
-public enum TransactionPaymentMethode {
+public enum TransactionPaymentMethod {
     CASH,
     DEBIT,
     CREDIT,

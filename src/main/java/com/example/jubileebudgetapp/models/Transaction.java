@@ -27,12 +27,13 @@ public class Transaction {
     private String category;
     private LocalDate date;
     private String description;
+    private String payee;
 
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
     @Enumerated(EnumType.STRING)
-    private TransactionPaymentMethode paymentMethode;
+    private TransactionPaymentMethod paymentMethode;
 
 // TODO: Relaties invoegen
 
