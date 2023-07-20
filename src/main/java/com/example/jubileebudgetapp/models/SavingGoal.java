@@ -1,5 +1,6 @@
 package com.example.jubileebudgetapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class SavingGoal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String goal;
     private String description;
     private BigDecimal targetAmount;
@@ -29,6 +31,9 @@ public class SavingGoal {
     @Enumerated(EnumType.STRING)
     private SavingGoalStatus status;
 
-    // TODO: Relaties invoegen
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
 }

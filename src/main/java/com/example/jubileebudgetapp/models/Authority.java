@@ -18,6 +18,7 @@ import java.io.Serializable;
 @IdClass(AuthorityKey.class)
 @Table(name = "authorities")
 public class Authority implements Serializable {
+
     @Id
     @Column(nullable = false)
     private String username;
@@ -25,6 +26,5 @@ public class Authority implements Serializable {
     @Id
     @Column(nullable = false)
     private String authority;
-
 
 }

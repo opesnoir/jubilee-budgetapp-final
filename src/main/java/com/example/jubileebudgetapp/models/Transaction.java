@@ -35,8 +35,12 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionPaymentMethod paymentMethod;
 
-    // TODO: Relaties invoegen
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
-
+    @ManyToOne
+    @JoinColumn(name = "balance_id")
+    private Balance balance;
 
 }

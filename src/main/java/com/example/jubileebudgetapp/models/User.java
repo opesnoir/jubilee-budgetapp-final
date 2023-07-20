@@ -55,11 +55,4 @@ public class User {
         this.authorities.remove(authority);
     }
 
-
-
-
-
-
-
-
 }

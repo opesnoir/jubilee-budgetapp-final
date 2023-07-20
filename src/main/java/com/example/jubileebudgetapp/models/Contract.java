@@ -1,5 +1,6 @@
 package com.example.jubileebudgetapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +29,9 @@ public class Contract {
     private LocalDate endDate;
     private BigDecimal amount;
 
-    // TODO: Relaties invoegen
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
 }

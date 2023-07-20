@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,7 +29,17 @@ public class Account {
     private LocalDate dateCreated;
     private BigDecimal balance;
 
-    // TODO: Relaties invoegen
+    @OneToMany(mappedBy = "account")
+    private List<Transaction> transactionList;
+
+    @OneToMany(mappedBy = "account")
+    private List<SavingGoal> savingGoalList;
+
+    @OneToMany(mappedBy = "account")
+    private List<Upload> uploadList;
+
+    @OneToMany(mappedBy = "account")
+    private List<Contract> contractList;
 
     @OneToOne
     @JsonIgnore
