@@ -16,14 +16,17 @@ import java.time.LocalDate;
 @Setter
 
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    private String firstname;
+    private String lastname;
     private LocalDate dateCreated;
     private BigDecimal balance;
+
+    // TODO: Relaties invoegen
 
 }
