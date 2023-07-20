@@ -27,9 +27,6 @@ public class SavingGoal {
     private BigDecimal targetAmount;
     private BigDecimal currentAmount;
 
-    @Column(name = "date_created")
-    private LocalDate dateCreated;
-
     @Enumerated(EnumType.STRING)
     private SavingGoalStatus status;
 
