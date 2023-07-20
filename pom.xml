@@ -47,7 +47,6 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-        <!--TODO: uitcommenten security en jsonwebtokens-->
 
         <!-- Spring Security -->
         <dependency>
