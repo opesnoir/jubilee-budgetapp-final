@@ -1,5 +1,6 @@
 package com.example.jubileebudgetapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +29,9 @@ public class Account {
     private BigDecimal balance;
 
     // TODO: Relaties invoegen
+
+    @OneToOne
+    @JsonIgnore
+    private User user;
 
 }

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Setter
 
 @Entity
-@Table(name = "contract")
+@Table(name = "contracts")
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
