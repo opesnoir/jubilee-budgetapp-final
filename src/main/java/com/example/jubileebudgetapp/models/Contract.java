@@ -28,4 +28,5 @@ public class Contract {
     private LocalDate endDate;
     private BigDecimal amount;
 
+    // TODO: Relaties invoegen
 }
