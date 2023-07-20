@@ -33,7 +33,7 @@ public class Transaction {
     private TransactionType type;
 
     @Enumerated(EnumType.STRING)
-    private TransactionPaymentMethod paymentMethode;
+    private TransactionPaymentMethod paymentMethod;
 
 // TODO: Relaties invoegen
 
