@@ -2,10 +2,20 @@ package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.TransactionDto;
 import com.example.jubileebudgetapp.models.Transaction;
+import com.example.jubileebudgetapp.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 public class TransactionService {
+
+    private final TransactionRepository transactionRepository;
+
+    public TransactionService(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
+
 
     //helper methodes
     public Transaction convertDtoToTransaction(TransactionDto transactionDto){
@@ -62,6 +72,28 @@ public class TransactionService {
         if (updatedTransactionDto.getPaymentMethod() != null){
             existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
         }
+    }
+
+    // calculate methodes used in balance
+    public BigDecimal calculateTotalIncome() {
+        return transactionRepository.calculateTotalIncome();
+    }
+
+    public BigDecimal calculateTotalExpense(){
+        return transactionRepository.calculateTotalExpense();
+    }
+
+    public BigDecimal calculateBalance(){
+        BigDecimal totalIncome = calculateTotalIncome();
+        BigDecimal totalExpense = calculateTotalExpense();
+
+        if (totalIncome == null) {
+            totalIncome = BigDecimal.ZERO;
+        }
+        if (totalExpense == null) {
+            totalExpense = BigDecimal.ZERO;
+        }
+        return totalIncome.subtract(totalExpense);
     }
 
 }
