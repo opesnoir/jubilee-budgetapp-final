@@ -27,12 +27,12 @@ public class SavingGoalDto {
     @NotBlank(message = "Goal is required")
     private String goal;
     private String description;
-    @NotBlank(message = "Target amount is required")
-    @DecimalMin(value = "0.00", message = "Amount must be greater than or equal to 0.00")
-    private BigDecimal targetAmount;
     @NotBlank(message = "Current amount is required")
     @DecimalMin(value = "0.00", message = "Amount must be greater than or equal to 0.00")
     private BigDecimal currentAmount;
+    @NotBlank(message = "Target amount is required")
+    @DecimalMin(value = "0.00", message = "Amount must be greater than or equal to 0.00")
+    private BigDecimal targetAmount;
 
     @NotNull(message = "Saving goal status cannot be null")
     @Pattern(regexp = "^(?i)(active|completed|inactive)$", message = "Please enter 'ACTIVE', 'COMPLETED' or 'INACTIVE'")
@@ -41,5 +41,6 @@ public class SavingGoalDto {
 
     @Valid
     private Account account;
+    private Long accountId;
 
 }

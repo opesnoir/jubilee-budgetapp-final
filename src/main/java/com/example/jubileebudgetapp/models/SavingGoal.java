@@ -25,8 +25,8 @@ public class SavingGoal {
 
     private String goal;
     private String description;
-    private BigDecimal targetAmount;
     private BigDecimal currentAmount;
+    private BigDecimal targetAmount;
 
     @Enumerated(EnumType.STRING)
     private SavingGoalStatus status;
