@@ -7,24 +7,34 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
+
+@Getter
+@Setter
+
 public class UserDto {
     @NotBlank
     @Size(min = 3, max = 50, message = " at least 3 to 50 characters long")
-    private String username;
+    public String username;
 
     @Size(min = 8, max = 50)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$", message = "The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
     public String password;
 
     @Email
-    private String email;
+    public String email;
 
-    private boolean enabled;
-    private String apikey;
+    public Boolean enabled;
+    public String apikey;
     private Account account;
     private Account accountId;
 
