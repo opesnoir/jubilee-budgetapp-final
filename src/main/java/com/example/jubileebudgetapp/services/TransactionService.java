@@ -41,25 +41,29 @@ public class TransactionService {
         return transactionDto;
     }
 
-    // helper methodes
-/*
-    public SavingGoalDto convertSavingGoalToDto(SavingGoal savingGoal){
-        SavingGoalDto savingGoalDto = new SavingGoalDto();
-        //hier komt de id wel te staan
+    public void updateTransactionFromDto(Transaction existingTransaction, TransactionDto updatedTransactionDto){
 
-        return savingGoalDto;
-    }
-
-        public void updateSavingGoalFromDto(SavingGoal existingSavingGoal, SavingGoalDto updatedSavingGoalDto){
-
-        if (updatedSavingGoalDto.getGoal() != null){
-            existingSavingGoal.setGoal(updatedSavingGoalDto.getGoal());
+        if (updatedTransactionDto.getAmount() != null){
+            existingTransaction.setAmount(updatedTransactionDto.getAmount());
         }
-        if (updatedSavingGoalDto.getDescription()!= null){
-            existingSavingGoal.setDescription(updatedSavingGoalDto.getDescription());
+        if (updatedTransactionDto.getCategory() != null){
+            existingTransaction.setCategory(updatedTransactionDto.getCategory());
+        }
+        if (updatedTransactionDto.getDate() != null){
+            existingTransaction.setDate(updatedTransactionDto.getDate());
+        }
+        if (updatedTransactionDto.getDescription() != null){
+            existingTransaction.setDescription(updatedTransactionDto.getDescription());
+        }
+        if (updatedTransactionDto.getPayee() != null){
+            existingTransaction.setPayee(updatedTransactionDto.getPayee());
+        }
+        if (updatedTransactionDto.getType() != null){
+            existingTransaction.setType(updatedTransactionDto.getType());
+        }
+        if (updatedTransactionDto.getPaymentMethod() != null){
+            existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
         }
     }
-    */
-
 
 }
