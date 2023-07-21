@@ -1,9 +1,6 @@
 package com.example.jubileebudgetapp.dtos;
 
 import com.example.jubileebudgetapp.models.Account;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
