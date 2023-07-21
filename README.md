@@ -41,8 +41,9 @@ Follow these steps to install and run the application locally:
 1. Make sure Java 17 and Maven are installed on your system.
 2. Clone the repository to your local machine.
 3. Navigate to the main project directory.
-4. Run the command mvn spring-boot:run to start the application.
-5. The application will now be running at http://localhost:8080.
+4. Update the PostgreSQL database configuration in the application.properties file located in the src/main/resources directory. Set the spring.datasource.url property to jdbc:postgresql://localhost:5432/jubilee-final (assuming your PostgreSQL database is running on port 5432).
+5. Run the command mvn spring-boot:run to start the application.
+6. The application will now be running at http://localhost:8080 (assuming your PostgreSQL database is configured to run on port 5432).
 
 
 # Nederlands
@@ -82,4 +83,4 @@ Volg deze stappen om de applicatie lokaal te installeren en uit te voeren:
 2. Clone de repository naar je lokale machine.
 3. Navigeer naar de hoofdmap van het project.
 4. Voer het commando mvn spring-boot:run uit om de applicatie te starten.
-5. De applicatie wordt nu uitgevoerd op http://localhost:8080.
+5. De applicatie wordt nu uitgevoerd op http://localhost:8080, (veronderstellend dat jouw PostgreSQL-database is geconfigureerd om op poort 5432 te draaien).

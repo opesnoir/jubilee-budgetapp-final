@@ -48,7 +48,6 @@ public class UserService {
         }
 
         User user = userRepository.findById(username).get();
-
         if (updatedUserDto.getPassword() != null) {
             user.setPassword(updatedUserDto.getPassword());
         }
