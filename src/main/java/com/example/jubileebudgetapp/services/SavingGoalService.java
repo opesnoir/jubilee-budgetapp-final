@@ -1,7 +1,6 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
-import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.SavingGoal;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +36,23 @@ public class SavingGoalService {
         return savingGoalDto;
     }
 
+    public void updateSavingGoalFromDto(SavingGoal existingSavingGoal, SavingGoalDto updatedSavingGoalDto){
 
+        if (updatedSavingGoalDto.getGoal() != null){
+            existingSavingGoal.setGoal(updatedSavingGoalDto.getGoal());
+        }
+        if (updatedSavingGoalDto.getDescription()!= null){
+            existingSavingGoal.setDescription(updatedSavingGoalDto.getDescription());
+        }
+        if (updatedSavingGoalDto.getCurrentAmount()!= null){
+            existingSavingGoal.setCurrentAmount(updatedSavingGoalDto.getCurrentAmount());
+        }
+        if (updatedSavingGoalDto.getTargetAmount()!= null){
+            existingSavingGoal.setTargetAmount(updatedSavingGoalDto.getTargetAmount());
+        }
+        if (updatedSavingGoalDto.getStatus()!= null){
+            existingSavingGoal.setStatus(updatedSavingGoalDto.getStatus());
+        }
+    }
 
 }
