@@ -14,6 +14,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class UploadDto {
     private Long id;
     private String fileName;

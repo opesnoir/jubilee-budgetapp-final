@@ -23,6 +23,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+
 public class TransactionDto {
     private Long id;
     @NotBlank(message = "Amount is required")
