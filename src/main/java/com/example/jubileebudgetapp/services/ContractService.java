@@ -1,9 +1,7 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.ContractDto;
-import com.example.jubileebudgetapp.dtos.SavingGoalDto;
 import com.example.jubileebudgetapp.models.Contract;
-import com.example.jubileebudgetapp.models.SavingGoal;
 import org.springframework.stereotype.Service;
 
 @Service
