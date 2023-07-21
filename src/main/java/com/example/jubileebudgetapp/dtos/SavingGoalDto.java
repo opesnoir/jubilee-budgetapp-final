@@ -2,11 +2,8 @@ package com.example.jubileebudgetapp.dtos;
 
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.SavingGoalStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -37,7 +34,7 @@ public class SavingGoalDto {
     @DecimalMin(value = "0.00", message = "Amount must be greater than or equal to 0.00")
     private BigDecimal currentAmount;
 
-    @NotNull(message = "Savinggoal status cannot be null")
+    @NotNull(message = "Saving goal status cannot be null")
     @Pattern(regexp = "^(?i)(active|completed|inactive)$", message = "Please enter 'ACTIVE', 'COMPLETED' or 'INACTIVE'")
     @Enumerated(EnumType.STRING)
     private SavingGoalStatus status;
