@@ -34,4 +34,5 @@ public class Contract {
     @JoinColumn(name = "account_id")
     private Account account;
 
+
 }

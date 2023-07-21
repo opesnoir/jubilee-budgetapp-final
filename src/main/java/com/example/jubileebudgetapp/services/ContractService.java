@@ -1,34 +1,58 @@
 package com.example.jubileebudgetapp.services;
 
+import com.example.jubileebudgetapp.dtos.ContractDto;
+import com.example.jubileebudgetapp.dtos.SavingGoalDto;
+import com.example.jubileebudgetapp.models.Contract;
+import com.example.jubileebudgetapp.models.SavingGoal;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ContractService {
 
-    // helper methodes
-/*    public SavingGoal convertDtoToSavingGoal(SavingGoalDto savingGoalDto){
-        SavingGoal savingGoal = new SavingGoal();
-        //hier komt geen id te staan
+    //helper methodes
+    public Contract convertDtoToContract(ContractDto contractDto){
+        Contract contract = new Contract();
 
-        return savingGoal;
+        contract.setPayee(contractDto.getPayee());
+        contract.setType(contractDto.getType());
+        contract.setStartDate(contractDto.getStartDate());
+        contract.setEndDate(contractDto.getEndDate());
+        contract.setAmount(contractDto.getAmount());
+
+        return contract;
     }
 
-    public SavingGoalDto convertSavingGoalToDto(SavingGoal savingGoal){
-        SavingGoalDto savingGoalDto = new SavingGoalDto();
-        //hier komt de id wel te staan
+    public ContractDto convertContractToDto(Contract contract){
+        ContractDto contractDto = new ContractDto();
 
-        return savingGoalDto;
+        contractDto.setId(contract.getId());
+        contractDto.setPayee(contract.getPayee());
+        contractDto.setType(contract.getType());
+        contractDto.setStartDate(contract.getStartDate());
+        contractDto.setEndDate(contract.getEndDate());
+        contractDto.setAmount(contract.getAmount());
+
+        contractDto.setAccountId(contract.getAccount().getId());
+
+        return contractDto;
     }
 
-        public void updateSavingGoalFromDto(SavingGoal existingSavingGoal, SavingGoalDto updatedSavingGoalDto){
-
-        if (updatedSavingGoalDto.getGoal() != null){
-            existingSavingGoal.setGoal(updatedSavingGoalDto.getGoal());
+    public void updateContractFromDto(Contract existingContract, ContractDto updatedContractDto){
+        if (updatedContractDto.getPayee() != null){
+            existingContract.setPayee(updatedContractDto.getPayee());
         }
-        if (updatedSavingGoalDto.getDescription()!= null){
-            existingSavingGoal.setDescription(updatedSavingGoalDto.getDescription());
+        if (updatedContractDto.getType() != null){
+            existingContract.setType(updatedContractDto.getType());
+        }
+        if (updatedContractDto.getStartDate() != null){
+            existingContract.setStartDate(updatedContractDto.getStartDate());
+        }
+        if (updatedContractDto.getEndDate() != null){
+            existingContract.setEndDate(updatedContractDto.getEndDate());
+        }
+        if (updatedContractDto.getAmount() != null){
+            existingContract.setAmount(updatedContractDto.getAmount());
         }
     }
-    */
 
 }

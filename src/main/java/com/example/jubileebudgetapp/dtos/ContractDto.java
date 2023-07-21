@@ -30,5 +30,6 @@ public class ContractDto {
 
     @Valid
     private Account account;
+    private Long accountId;
 
 }

@@ -1,8 +1,6 @@
 package com.example.jubileebudgetapp.services;
 
-import com.example.jubileebudgetapp.dtos.SavingGoalDto;
 import com.example.jubileebudgetapp.dtos.TransactionDto;
-import com.example.jubileebudgetapp.models.SavingGoal;
 import com.example.jubileebudgetapp.models.Transaction;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
 
     //helper methodes
-    public Transaction converDtoToTransaction(TransactionDto transactionDto){
+    public Transaction convertDtoToTransaction(TransactionDto transactionDto){
         Transaction transaction = new Transaction();
 
         transaction.setAmount(transactionDto.getAmount());

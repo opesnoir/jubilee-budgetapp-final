@@ -1,11 +1,13 @@
 package com.example.jubileebudgetapp.services;
 
+
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
 import com.example.jubileebudgetapp.models.SavingGoal;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SavingGoalService {
+
 
 
     // helper methodes
@@ -37,7 +39,6 @@ public class SavingGoalService {
     }
 
     public void updateSavingGoalFromDto(SavingGoal existingSavingGoal, SavingGoalDto updatedSavingGoalDto){
-
         if (updatedSavingGoalDto.getGoal() != null){
             existingSavingGoal.setGoal(updatedSavingGoalDto.getGoal());
         }
