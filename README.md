@@ -83,4 +83,4 @@ Volg deze stappen om de applicatie lokaal te installeren en uit te voeren:
 2. Clone de repository naar je lokale machine.
 3. Navigeer naar de hoofdmap van het project.
 4. Voer het commando mvn spring-boot:run uit om de applicatie te starten.
-5. De applicatie wordt nu uitgevoerd op http://localhost:8080, (veronderstellend dat jouw PostgreSQL-database is geconfigureerd om op poort 5432 te draaien).
+5. De applicatie wordt nu uitgevoerd op http://localhost:8080 (veronderstellend dat jouw PostgreSQL-database is geconfigureerd om op poort 5432 te draaien).
