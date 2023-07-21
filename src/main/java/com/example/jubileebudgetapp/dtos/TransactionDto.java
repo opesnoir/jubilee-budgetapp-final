@@ -46,6 +46,7 @@ public class TransactionDto {
 
     @Valid
     private Account account;
+    private Long accountId;
     private Balance balance;
 
 }
