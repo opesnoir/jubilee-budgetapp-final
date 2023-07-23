@@ -42,6 +42,14 @@ public class UserService {
     }
 
 
+
+    public UserDto getUser(String username){
+        User user = userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
+
+        return convertUserToDto(user);
+    }
+
     public UserDto createUser(UserDto userDto, AccountDto accountDto){
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
