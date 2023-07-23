@@ -9,6 +9,8 @@ import com.example.jubileebudgetapp.repositories.UploadRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Service
 public class UploadService {
 
@@ -23,10 +25,19 @@ public class UploadService {
     public UploadDto uploadFile(MultipartFile file, Long accountId){
         try{
             Account account = accountRepository.findById(accountId)
-                    .orElseThrow(() -> new AccountIdNotFoundException());
+                    .orElseThrow(() -> new AccountIdNotFoundException(accountId));
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            byte[] fileBytes = file.getBytes();
+            String fileName = file.getOriginalFilename();
+
+            Upload upload = convertDtoToUpload(createUploadDto(fileBytes, fileName, account));
+            Upload savedUpload = uploadRepository.save(upload);
+            UploadDto uploadDto = convertUploadToDto(savedUpload);
+
+            return uploadDto;
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Failed to upload file", e);
         }
     }
 
