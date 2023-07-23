@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.FileNotFoundException;
 import java.net.URI;
 
 @RestController
@@ -47,5 +48,10 @@ public class UploadController {
                 .body(fileResource);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UploadDto> deleteFile(@PathVariable("id") Long id) throws FileNotFoundException {
+        UploadDto deletedFileDto = uploadService.deleteFile(id);
+        return ResponseEntity.ok(deletedFileDto);
+    }
 
 }
