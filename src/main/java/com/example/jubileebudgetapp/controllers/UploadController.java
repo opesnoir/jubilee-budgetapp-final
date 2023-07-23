@@ -35,9 +35,9 @@ public class UploadController {
                 .body(uploadedFileDto);
     }
 
-    @GetMapping("/{fileId}/download")
-    public ResponseEntity<Resource> downloadFile(@PathVariable("fileId") Long fileId) throws UploadFileNotFoundException {
-        Resource fileResource = uploadService.downloadFile(fileId);
+    @GetMapping("/{id}/download")
+    public ResponseEntity<Resource> downloadFile(@PathVariable("id") Long id) throws UploadFileNotFoundException {
+        Resource fileResource = uploadService.downloadFile(id);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentDispositionFormData("attachment", fileResource.getFilename());

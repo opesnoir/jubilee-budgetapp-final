@@ -11,8 +11,8 @@ public class UploadFileNotFoundException extends RuntimeException {
         super();
     }
 
-    public UploadFileNotFoundException(Long fileId) {
-        super("File not found with ID: " + fileId);
+    public UploadFileNotFoundException(Long id) {
+        super("File not found with ID: " + id);
     }
 
 

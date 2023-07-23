@@ -12,6 +12,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @Service
@@ -44,9 +45,9 @@ public class UploadService {
         }
     }
 
-    public Resource downloadFile(Long fileId) throws UploadFileNotFoundException{
-        Upload upload = uploadRepository.findById(fileId)
-                .orElseThrow(() -> new UploadFileNotFoundException(fileId));
+    public Resource downloadFile(Long id) throws UploadFileNotFoundException{
+        Upload upload = uploadRepository.findById(id)
+                .orElseThrow(() -> new UploadFileNotFoundException(id));
 
         byte[] fileBytes = upload.getUpload();
         String fileName = upload.getFileName();
@@ -57,6 +58,14 @@ public class UploadService {
                 return fileName;
             }
         };
+    }
+
+    public UploadDto deleteFile(Long id) throws FileNotFoundException{
+        Upload upload = uploadRepository.findById(id)
+                .orElseThrow(() -> new FileNotFoundException("File not found with ID: " + id));
+
+        uploadRepository.delete(upload);
+        return convertUploadToDto(upload);
     }
 
     //helper methodes
