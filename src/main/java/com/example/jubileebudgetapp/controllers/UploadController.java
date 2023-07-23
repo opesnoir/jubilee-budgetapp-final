@@ -1,12 +1,12 @@
 package com.example.jubileebudgetapp.controllers;
 
 import com.example.jubileebudgetapp.dtos.UploadDto;
+import com.example.jubileebudgetapp.exceptions.UploadFileNotFoundException;
 import com.example.jubileebudgetapp.services.UploadService;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,7 +31,20 @@ public class UploadController {
                 .buildAndExpand(uploadedFileDto.getId())
                 .toUriString());
 
-        return ResponseEntity.created(uri).body(uploadedFileDto);
+        return ResponseEntity.created(uri)
+                .body(uploadedFileDto);
+    }
+
+    @GetMapping("/{fileId}/download")
+    public ResponseEntity<Resource> downloadFile(@PathVariable("fileId") Long fileId) throws UploadFileNotFoundException {
+        Resource fileResource = uploadService.downloadFile(fileId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDispositionFormData("attachment", fileResource.getFilename());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(fileResource);
     }
 
 
