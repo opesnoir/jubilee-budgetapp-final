@@ -66,8 +66,8 @@ public class SpringSecurityConfig {
 
                 // upload
                 .requestMatchers(HttpMethod.POST, "/uploads").hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.GET, "/uploads/{fileId}/download").hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.DELETE, "/uploads/{fileId}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/uploads/{id}/download").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.DELETE, "/uploads/{id}").hasAnyRole("ADMIN", "USER")
 
                 // authentication
                 .requestMatchers("/authenticated").authenticated()
