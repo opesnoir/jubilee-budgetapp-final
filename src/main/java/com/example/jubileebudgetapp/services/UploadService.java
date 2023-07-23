@@ -2,10 +2,13 @@ package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.UploadDto;
 import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
+import com.example.jubileebudgetapp.exceptions.UploadFileNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Upload;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.UploadRepository;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,7 +44,20 @@ public class UploadService {
         }
     }
 
+    public Resource downloadFile(Long fileId) throws UploadFileNotFoundException{
+        Upload upload = uploadRepository.findById(fileId)
+                .orElseThrow(() -> new UploadFileNotFoundException(fileId));
 
+        byte[] fileBytes = upload.getUpload();
+        String fileName = upload.getFileName();
+
+        return new ByteArrayResource(fileBytes) {
+            @Override
+            public String getFilename() {
+                return fileName;
+            }
+        };
+    }
 
     //helper methodes
     public Upload convertDtoToUpload(UploadDto uploadDto){
