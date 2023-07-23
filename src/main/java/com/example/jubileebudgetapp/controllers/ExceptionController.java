@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionController {
 
+    @ExceptionHandler(value = AccountIdNotFoundException.class)
+    public ResponseEntity<String> exception(AccountIdNotFoundException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<String> exception(BadRequestException exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);

@@ -1,12 +1,36 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.UploadDto;
+import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Upload;
+import com.example.jubileebudgetapp.repositories.AccountRepository;
+import com.example.jubileebudgetapp.repositories.UploadRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UploadService {
+
+    private final UploadRepository uploadRepository;
+    private final AccountRepository accountRepository;
+
+    public UploadService(UploadRepository uploadRepository, AccountRepository accountRepository) {
+        this.uploadRepository = uploadRepository;
+        this.accountRepository = accountRepository;
+    }
+
+    public UploadDto uploadFile(MultipartFile file, Long accountId){
+        try{
+            Account account = accountRepository.findById(accountId)
+                    .orElseThrow(() -> new AccountIdNotFoundException());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     //helper methodes
     public Upload convertDtoToUpload(UploadDto uploadDto){
