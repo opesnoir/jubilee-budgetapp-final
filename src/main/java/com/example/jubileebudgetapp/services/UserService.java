@@ -56,14 +56,12 @@ public class UserService {
         userDto.setEnabled(true);
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-        User newUser = convertUserDtoToUser(userDto);
-        userRepository.save(newUser);
+        User newUser = userRepository.save(convertUserDtoToUser(userDto));
 
         Account newAccount = accountService.convertDtoToAccount(accountDto);
         accountRepository.save(newAccount);
 
         accountDto.setUser(newUser);
-        accountRepository.save(newAccount);
 
         return convertUserToDto(newUser);
     }
