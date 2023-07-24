@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -50,18 +51,13 @@ public class UserService {
         return convertUserToDto(user);
     }
 
-    public UserDto createUser(UserDto userDto, AccountDto accountDto){
+        public UserDto createUser(UserDto userDto){
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
         userDto.setEnabled(true);
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         User newUser = userRepository.save(convertUserDtoToUser(userDto));
-
-        Account newAccount = accountService.convertDtoToAccount(accountDto);
-        accountRepository.save(newAccount);
-
-        accountDto.setUser(newUser);
 
         return convertUserToDto(newUser);
     }

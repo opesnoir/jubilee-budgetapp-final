@@ -54,10 +54,11 @@ public class SpringSecurityConfig {
 
                 // user
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/users/{username}").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/users").permitAll()
+                .requestMatchers(HttpMethod.GET, "/users/{username}").permitAll()
 
                 // account
+                .requestMatchers(HttpMethod.POST, "/accounts").permitAll()
 
                 // balance
 
@@ -77,6 +78,7 @@ public class SpringSecurityConfig {
                 .requestMatchers("/authenticate").permitAll()
 
                 .and()
+                .csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
