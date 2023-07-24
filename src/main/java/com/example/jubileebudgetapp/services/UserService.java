@@ -2,7 +2,6 @@ package com.example.jubileebudgetapp.services;
 
 
 import com.example.jubileebudgetapp.dtos.UserDto;
-import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.models.Authority;
 import com.example.jubileebudgetapp.models.User;
 import com.example.jubileebudgetapp.repositories.UserRepository;
@@ -61,6 +60,15 @@ public class UserService {
         return convertUserToDto(newUser);
     }
 
+        public UserDto updateUser(String username, UserDto updatedUserDto){
+            User existingUser = userRepository.findById(username)
+                    .orElseThrow(() -> new UsernameNotFoundException(username));
+
+            updateUserFromDto(existingUser, updatedUserDto);
+            User updatedUser = userRepository.save(existingUser);
+
+            return convertUserToDto(updatedUser);
+    }
 
     // authority methods
     public Set<Authority> getAuthorities(String username) {
@@ -118,11 +126,10 @@ public class UserService {
         return userDto;
     }
 
-    public void updateUserFromDto(String username, UserDto updatedUserDto){
+/*    public void updateUserFromDto(String username, UserDto updatedUserDto){
         if (!userRepository.existsById(username)){
             throw new UsernameNotFoundException(username);
         }
-
         User user = userRepository.findById(username).get();
         if (updatedUserDto.getPassword() != null) {
             user.setPassword(updatedUserDto.getPassword());
@@ -131,6 +138,12 @@ public class UserService {
             user.setEmail(updatedUserDto.getEmail());
         }
         userRepository.save(user);
+    }*/
+
+    public void updateUserFromDto(User existingUser, UserDto updatedUserDto){
+        if (updatedUserDto.getEmail() != null) {
+            existingUser.setEmail(updatedUserDto.getEmail());
+        }
     }
 
 }

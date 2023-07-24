@@ -24,7 +24,6 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserDto>> getUsers(){
         List<UserDto> userDtos = userService.getUsers();
-
         return ResponseEntity.ok().body(userDtos);
     }
 
@@ -53,5 +52,10 @@ public class UserController {
         return ResponseEntity.created(uri).body(createdUserDto);
     }
 
+    @RequestMapping(value = "/{username}", method = {RequestMethod.PUT, RequestMethod.PATCH})
+    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username, @RequestBody UserDto updatedUserDto){
+        UserDto updatedUser = userService.updateUser(username, updatedUserDto);
+        return ResponseEntity.ok(updatedUser);
+    }
 
 }
