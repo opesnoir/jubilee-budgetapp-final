@@ -126,6 +126,9 @@ public class UserService {
     }
 
     public void updateUserFromDto(User existingUser, UserDto updatedUserDto){
+        if(updatedUserDto.getPassword() != null){
+            existingUser.setPassword(passwordEncoder.encode(updatedUserDto.getPassword()));
+        }
         if (updatedUserDto.getEmail() != null) {
             existingUser.setEmail(updatedUserDto.getEmail());
         }
