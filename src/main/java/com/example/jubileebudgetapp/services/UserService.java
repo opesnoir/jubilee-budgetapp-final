@@ -31,13 +31,9 @@ public class UserService {
     }
 
     public List<UserDto> getUsers(){
+        List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
 
-        if (list.isEmpty()) {
-            throw new RecordNotFoundException("No user data found");
-        }
-
-        List<UserDto> collection = new ArrayList<>();
         for (User user : list) {
             collection.add(convertUserToDto(user));
         }

@@ -3,11 +3,13 @@ package com.example.jubileebudgetapp.controllers;
 import com.example.jubileebudgetapp.dtos.AccountDto;
 import com.example.jubileebudgetapp.dtos.UserDto;
 import com.example.jubileebudgetapp.services.UserService;
+import jdk.dynalink.linker.LinkerServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -19,12 +21,17 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getUsers(){
+        List<UserDto> userDtos = userService.getUsers();
+
+        return ResponseEntity.ok().body(userDtos);
+    }
+
     @GetMapping("/{username}")
     public ResponseEntity<UserDto> getUser(@PathVariable("username") String username){
         UserDto userDto = userService.getUser(username);
-        if (userDto == null){
-            return ResponseEntity.notFound().build();
-        }
+
         return ResponseEntity.ok(userDto);
     }
 
