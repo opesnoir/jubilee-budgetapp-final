@@ -1,13 +1,9 @@
 package com.example.jubileebudgetapp.services;
 
 
-import com.example.jubileebudgetapp.dtos.AccountDto;
 import com.example.jubileebudgetapp.dtos.UserDto;
-import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Authority;
 import com.example.jubileebudgetapp.models.User;
-import com.example.jubileebudgetapp.repositories.AccountRepository;
-import com.example.jubileebudgetapp.repositories.TransactionRepository;
 import com.example.jubileebudgetapp.repositories.UserRepository;
 import com.example.jubileebudgetapp.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Set;
 
 @Service
@@ -29,19 +23,9 @@ public class UserService {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
-    private final AccountService accountService;
-    private final AccountRepository accountRepository;
-    private final TransactionService transactionService;
-    private final TransactionRepository transactionRepository;
-
-    public UserService(UserRepository userRepository, AccountService accountService, AccountRepository accountRepository, TransactionService transactionService, TransactionRepository transactionRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.accountService = accountService;
-        this.accountRepository = accountRepository;
-        this.transactionService = transactionService;
-        this.transactionRepository = transactionRepository;
     }
-
 
 
     public UserDto getUser(String username){
