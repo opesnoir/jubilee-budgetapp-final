@@ -31,8 +31,13 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity<UserDto> getUser(@PathVariable("username") String username){
         UserDto userDto = userService.getUser(username);
-
         return ResponseEntity.ok(userDto);
+    }
+
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("username") String username){
+        userService.deleteUser(username);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping

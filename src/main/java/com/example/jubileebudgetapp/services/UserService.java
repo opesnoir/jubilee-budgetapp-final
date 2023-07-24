@@ -33,7 +33,6 @@ public class UserService {
     public List<UserDto> getUsers(){
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
-
         for (User user : list) {
             collection.add(convertUserToDto(user));
         }
@@ -45,6 +44,10 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
         return convertUserToDto(user);
+    }
+
+    public void deleteUser(String username){
+        userRepository.deleteById(username);
     }
 
         public UserDto createUser(UserDto userDto){
