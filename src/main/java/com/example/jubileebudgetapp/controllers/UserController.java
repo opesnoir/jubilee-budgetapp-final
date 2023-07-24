@@ -40,30 +40,6 @@ public class UserController {
 
         return ResponseEntity.created(uri).body(createdUserDto);
     }
-/*    @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
-        UserDto createdUserDto = userService.createUser(userDto);
-        userService.addAuthority(createdUserDto.getUsername(), "ROLE_USER");
 
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{username}")
-                .buildAndExpand(createdUserDto.getUsername())
-                .toUriString());
-
-        return ResponseEntity.created(uri).body(createdUserDto);
-    }*/
-
-/*    @PostMapping
-    public ResponseEntity<UserDto> createUser(UserDto userDto, AccountDto accountDto){
-        UserDto createdUserDto = userService.createUser(userDto, accountDto);
-        userService.addAuthority(createdUserDto.getUsername(), "ROLE_USER");
-
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{username}")
-                .buildAndExpand(createdUserDto.getUsername())
-                .toUriString());
-
-        return ResponseEntity.created(uri).body(createdUserDto);
-    }*/
 
 }
