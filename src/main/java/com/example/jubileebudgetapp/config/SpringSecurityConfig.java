@@ -60,6 +60,8 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.PATCH, "/users/{username}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
 
+
+
                 // account
                 .requestMatchers(HttpMethod.POST, "/accounts").permitAll()
 
@@ -72,9 +74,11 @@ public class SpringSecurityConfig {
                 // transaction
 
                 // upload
-                .requestMatchers(HttpMethod.POST, "/uploads").hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.GET, "/uploads/{id}/download").hasAnyRole("ADMIN", "USER")
-                .requestMatchers(HttpMethod.DELETE, "/uploads/{id}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.POST, "/uploads").hasRole("USER")
+                .requestMatchers(HttpMethod.GET, "/uploads/{id}/download").hasRole("USER")
+                .requestMatchers(HttpMethod.DELETE, "/uploads/{id}").hasRole("USER")
+
+
 
                 // authentication
                 .requestMatchers("/authenticated").authenticated()
