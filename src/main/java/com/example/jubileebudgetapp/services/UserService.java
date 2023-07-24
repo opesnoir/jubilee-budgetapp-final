@@ -2,6 +2,7 @@ package com.example.jubileebudgetapp.services;
 
 
 import com.example.jubileebudgetapp.dtos.UserDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.models.Authority;
 import com.example.jubileebudgetapp.models.User;
 import com.example.jubileebudgetapp.repositories.UserRepository;
@@ -12,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -27,6 +30,19 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public List<UserDto> getUsers(){
+        List<User> list = userRepository.findAll();
+
+        if (list.isEmpty()) {
+            throw new RecordNotFoundException("No user data found");
+        }
+
+        List<UserDto> collection = new ArrayList<>();
+        for (User user : list) {
+            collection.add(convertUserToDto(user));
+        }
+        return collection;
+    }
 
     public UserDto getUser(String username){
         User user = userRepository.findById(username)
