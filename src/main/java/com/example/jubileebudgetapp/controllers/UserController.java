@@ -1,10 +1,8 @@
 package com.example.jubileebudgetapp.controllers;
 
-import com.example.jubileebudgetapp.dtos.AccountDto;
 import com.example.jubileebudgetapp.dtos.UserDto;
 import com.example.jubileebudgetapp.exceptions.BadRequestException;
 import com.example.jubileebudgetapp.services.UserService;
-import jdk.dynalink.linker.LinkerServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -82,4 +80,5 @@ public class UserController {
         userService.removeAuthority(username, authority);
         return ResponseEntity.noContent().build();
     }
+
 }
