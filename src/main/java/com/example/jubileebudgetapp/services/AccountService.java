@@ -3,6 +3,7 @@ package com.example.jubileebudgetapp.services;
 import com.example.jubileebudgetapp.dtos.AccountDto;
 import com.example.jubileebudgetapp.dtos.UserDto;
 import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.exceptions.UsernameNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.User;
@@ -19,7 +20,6 @@ import java.util.Optional;
 public class AccountService {
 
     private final AccountRepository accountRepository;
-
     private final UserRepository userRepository;
     private final UserService userService;
 
@@ -47,10 +47,10 @@ public class AccountService {
 
     //TODO:account nog toevoegen, maar het lukt niet
     public AccountDto createAccount(AccountDto accountDto){
-        Account account = convertDtoToAccount(accountDto);
-        Account savedAccount = accountRepository.save(account);
+            Account account = convertDtoToAccount(accountDto);
+            Account savedAccount = accountRepository.save(account);
 
-        return convertAccountToDto(savedAccount);
+            return convertAccountToDto(savedAccount);
     }
 
     public AccountDto updateAccount(Long id, AccountDto updatedAccountDto){
@@ -78,12 +78,11 @@ public class AccountService {
         if (account.getBalance() != null){
             accountDto.setBalance(account.getBalance());
         }
-
-/*        //TODO: wat gaat hier mis:
         if (account.getUser() != null) {
             accountDto.setUserDto(UserService.convertUserToDto(account.getUser()));
         }
-        }*/
+
+
         return accountDto;
     }
 
@@ -109,6 +108,22 @@ public class AccountService {
         }
         if (updatedAccountDto.getLastname() != null){
             existingAccount.setLastname(updatedAccountDto.getLastname());
+        }
+    }
+
+    public void assignUserToAccount(String username, Long accountId) {
+        Optional<User> optionalUser = Optional.ofNullable(userRepository.findUserByUsername(username));
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+        if (optionalUser.isPresent() && optionalAccount.isPresent()){
+            var user = optionalUser.get();
+            var account = optionalAccount.get();
+
+            account.setUser(user);
+            accountRepository.save(account);
+
+        } else {
+            throw new RecordNotFoundException();
         }
     }
 

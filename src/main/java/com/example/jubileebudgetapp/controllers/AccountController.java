@@ -43,4 +43,9 @@ public class AccountController {
         accountService.deleteAccount(id);
     }
 
+    @PutMapping("/{username}/{accountId}")
+    public ResponseEntity<Object> assignAccountToUser(@PathVariable("username") String username, @PathVariable("accountId") Long accountId){
+        accountService.assignUserToAccount(username, accountId);
+        return ResponseEntity.noContent().build();
+    }
 }

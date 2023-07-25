@@ -30,6 +30,6 @@ public class AccountDto {
     private List<Contract> contractList;
 
     @Valid
-    private User user;
+    private UserDto userDto;
 
 }

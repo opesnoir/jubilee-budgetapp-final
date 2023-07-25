@@ -62,8 +62,10 @@ public class SpringSecurityConfig {
 
 
 
+
                 // account
                 .requestMatchers(HttpMethod.POST, "/accounts").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/accounts/{username}/{accountId}").permitAll()
 
                 // balance
 
