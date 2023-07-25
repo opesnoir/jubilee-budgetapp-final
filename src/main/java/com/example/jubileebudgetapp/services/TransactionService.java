@@ -54,8 +54,12 @@ public class TransactionService {
         return transactionDto;
     }
 
+    public TransactionDto createTransaction(TransactionDto transactionDto){
+        Transaction transaction = convertDtoToTransaction(transactionDto);
+        transactionRepository.save(transaction);
 
-    // create
+        return convertTransactionToDto(transaction);
+    }
     // delete
     //  update
 
