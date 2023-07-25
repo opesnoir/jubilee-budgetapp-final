@@ -1,7 +1,9 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.TransactionDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.exceptions.TransactionNotFoundException;
+import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Transaction;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.TransactionRepository;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TransactionService {
@@ -128,6 +131,21 @@ public class TransactionService {
         }
         if (updatedTransactionDto.getPaymentMethod() != null){
             existingTransaction.setPaymentMethod(updatedTransactionDto.getPaymentMethod());
+        }
+    }
+
+    public void assignAccountToTransaction(Long id, Long accountId){
+        Optional<Transaction> optionalTransaction = transactionRepository.findById(id);
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+        if (optionalTransaction.isPresent() && optionalAccount.isPresent()){
+            var transaction = optionalTransaction.get();
+            var account = optionalAccount.get();
+
+            transaction.setAccount(account);
+            transactionRepository.save(transaction);
+        } else {
+            throw new RecordNotFoundException();
         }
     }
 
