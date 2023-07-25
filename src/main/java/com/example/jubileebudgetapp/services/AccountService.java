@@ -1,10 +1,8 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.AccountDto;
-import com.example.jubileebudgetapp.dtos.UserDto;
 import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
 import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
-import com.example.jubileebudgetapp.exceptions.UsernameNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.User;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
@@ -21,13 +19,12 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
-    private final UserService userService;
 
-    public AccountService(AccountRepository accountRepository, UserRepository userRepository, UserService userService) {
+    public AccountService(AccountRepository accountRepository, UserRepository userRepository) {
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
-        this.userService = userService;
     }
+
 
     public List<AccountDto> getAccounts(){
         List<Account> list = accountRepository.findAll();
@@ -45,7 +42,6 @@ public class AccountService {
         return convertAccountToDto(account);
     }
 
-    //TODO:account nog toevoegen, maar het lukt niet
     public AccountDto createAccount(AccountDto accountDto){
             Account account = convertDtoToAccount(accountDto);
             Account savedAccount = accountRepository.save(account);
@@ -82,7 +78,6 @@ public class AccountService {
             accountDto.setUserDto(UserService.convertUserToDto(account.getUser()));
         }
 
-
         return accountDto;
     }
 
@@ -95,10 +90,6 @@ public class AccountService {
         if (accountDto.getBalance() != null){
             account.setBalance(accountDto.getBalance());
         }
-/*        //TODO:wat gaat hier mis?
-        account.setUser(accountDto.getUser());*/
-
-
         return account;
     }
 

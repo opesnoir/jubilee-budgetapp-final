@@ -60,12 +60,15 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.PATCH, "/users/{username}").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(HttpMethod.DELETE, "/users/{username}").hasRole("ADMIN")
 
-
-
-
                 // account
                 .requestMatchers(HttpMethod.POST, "/accounts").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/accounts/{username}/{accountId}").permitAll()
+
+                .requestMatchers(HttpMethod.GET, "/accounts").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/accounts/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/accounts/{id}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.PATCH, "/accounts/{id}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.DELETE, "/accounts/{id}").hasRole("ADMIN")
 
                 // balance
 
