@@ -3,7 +3,9 @@ package com.example.jubileebudgetapp.services;
 import com.example.jubileebudgetapp.dtos.AccountDto;
 import com.example.jubileebudgetapp.dtos.UserDto;
 import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
+import com.example.jubileebudgetapp.exceptions.UsernameNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
+import com.example.jubileebudgetapp.models.User;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -42,10 +45,13 @@ public class AccountService {
         return convertAccountToDto(account);
     }
 
-/*    public UserDto createAccount(){
+    //TODO:account nog toevoegen, maar het lukt niet
+    public AccountDto createAccount(AccountDto accountDto){
+        Account account = convertDtoToAccount(accountDto);
+        Account savedAccount = accountRepository.save(account);
 
-
-    }*/
+        return convertAccountToDto(savedAccount);
+    }
 
     public AccountDto updateAccount(Long id, AccountDto updatedAccountDto){
         Account existingAccount = accountRepository.findById(id)
@@ -72,8 +78,12 @@ public class AccountService {
         if (account.getBalance() != null){
             accountDto.setBalance(account.getBalance());
         }
-        //TODO: vragen of dit klopt
-        userService.convertUserToDto(accountDto.getUser());
+
+/*        //TODO: wat gaat hier mis:
+        if (account.getUser() != null) {
+            accountDto.setUserDto(UserService.convertUserToDto(account.getUser()));
+        }
+        }*/
         return accountDto;
     }
 
@@ -86,6 +96,9 @@ public class AccountService {
         if (accountDto.getBalance() != null){
             account.setBalance(accountDto.getBalance());
         }
+/*        //TODO:wat gaat hier mis?
+        account.setUser(accountDto.getUser());*/
+
 
         return account;
     }
