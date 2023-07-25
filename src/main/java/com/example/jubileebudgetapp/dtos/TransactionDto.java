@@ -50,4 +50,6 @@ public class TransactionDto {
     private Long accountId;
     private Balance balance;
 
+    private AccountDto accountDto;
+
 }

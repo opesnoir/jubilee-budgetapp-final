@@ -2,19 +2,52 @@ package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.TransactionDto;
 import com.example.jubileebudgetapp.models.Transaction;
+import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TransactionService {
 
-    private final TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
+    private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository, AccountService accountService) {
         this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
+        this.accountService = accountService;
     }
+
+
+    //get all
+    public List<TransactionDto> getTransactions(){
+        List<Transaction> transactions = transactionRepository.findAll();
+        return convertToDtos(transactions);
+    }
+
+    private List<TransactionDto> convertToDtos(List<Transaction> transactions) {
+        List<TransactionDto> dtos = new ArrayList<>();
+
+        for (Transaction transaction : transactions){
+            TransactionDto dto = convertTransactionToDto(transaction);
+            if (transaction.getAccount() !=null){
+                dto.setAccountDto(accountService.convertAccountToDto(transaction.getAccount()));
+            }
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+
+    //get one
+    // create
+    // delete
+    //  update
 
 
     //helper methodes

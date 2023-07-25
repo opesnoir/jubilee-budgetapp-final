@@ -30,6 +30,7 @@ public class Account {
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "account")
+    @JsonIgnore
     private List<Transaction> transactionList;
 
     @OneToMany(mappedBy = "account")
