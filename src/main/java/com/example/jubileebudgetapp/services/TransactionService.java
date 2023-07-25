@@ -1,6 +1,8 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.TransactionDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
+import com.example.jubileebudgetapp.exceptions.TransactionNotFoundException;
 import com.example.jubileebudgetapp.models.Transaction;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.TransactionRepository;
@@ -23,8 +25,6 @@ public class TransactionService {
         this.accountService = accountService;
     }
 
-
-    //get all
     public List<TransactionDto> getTransactions(){
         List<Transaction> transactions = transactionRepository.findAll();
         return convertTransactionsToDtos(transactions);
@@ -43,8 +43,18 @@ public class TransactionService {
         return transactionDtoList;
     }
 
+    public TransactionDto getTransaction(Long id) {
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException(id));
+        TransactionDto transactionDto = convertTransactionToDto(transaction);
 
-    //get one
+        if (transaction.getAccount() != null) {
+            transactionDto.setAccountDto(accountService.convertAccountToDto(transaction.getAccount()));
+        }
+        return transactionDto;
+    }
+
+
     // create
     // delete
     //  update
