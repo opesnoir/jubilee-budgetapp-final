@@ -27,20 +27,20 @@ public class TransactionService {
     //get all
     public List<TransactionDto> getTransactions(){
         List<Transaction> transactions = transactionRepository.findAll();
-        return convertToDtos(transactions);
+        return convertTransactionsToDtos(transactions);
     }
 
-    private List<TransactionDto> convertToDtos(List<Transaction> transactions) {
-        List<TransactionDto> dtos = new ArrayList<>();
+    private List<TransactionDto> convertTransactionsToDtos(List<Transaction> transactions) {
+        List<TransactionDto> transactionDtoList = new ArrayList<>();
 
         for (Transaction transaction : transactions){
-            TransactionDto dto = convertTransactionToDto(transaction);
+            TransactionDto transactionDto = convertTransactionToDto(transaction);
             if (transaction.getAccount() !=null){
-                dto.setAccountDto(accountService.convertAccountToDto(transaction.getAccount()));
+                transactionDto.setAccountDto(accountService.convertAccountToDto(transaction.getAccount()));
             }
-            dtos.add(dto);
+            transactionDtoList.add(transactionDto);
         }
-        return dtos;
+        return transactionDtoList;
     }
 
 
