@@ -48,4 +48,5 @@ public class AccountController {
         accountService.assignUserToAccount(username, accountId);
         return ResponseEntity.noContent().build();
     }
+
 }

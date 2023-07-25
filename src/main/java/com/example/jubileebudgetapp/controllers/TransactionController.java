@@ -59,6 +59,12 @@ public class TransactionController {
         return ResponseEntity.ok(updatedTransaction);
     }
 
+    @PutMapping("/{id}/{accountId}")
+    public ResponseEntity<Object> assignAccountToTransaction(@PathVariable("id") Long id, @PathVariable("accountId") Long accountId){
+        transactionService.assignAccountToTransaction(id, accountId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/calculate-total-income")
     public ResponseEntity<BigDecimal> calculateTotalIncome(){
         BigDecimal totalIncome = transactionService.calculateTotalIncome();
