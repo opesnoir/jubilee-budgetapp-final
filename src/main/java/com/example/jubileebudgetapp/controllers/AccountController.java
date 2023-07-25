@@ -3,7 +3,6 @@ package com.example.jubileebudgetapp.controllers;
 import com.example.jubileebudgetapp.dtos.AccountDto;
 import com.example.jubileebudgetapp.services.AccountService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
