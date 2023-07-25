@@ -60,8 +60,21 @@ public class TransactionService {
 
         return convertTransactionToDto(transaction);
     }
-    // delete
-    //  update
+
+    public void deleteTransaction(Long id){
+        transactionRepository.deleteById(id);
+    }
+
+    public TransactionDto updateTransaction(Long id, TransactionDto updatedTransactionDto){
+        Transaction existingTransaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new TransactionNotFoundException(id));
+
+        updateTransactionFromDto(existingTransaction, updatedTransactionDto);
+        Transaction updatedTransaction = transactionRepository.save(existingTransaction);
+
+        return convertTransactionToDto(updatedTransaction);
+    }
+
 
 
     //helper methodes
