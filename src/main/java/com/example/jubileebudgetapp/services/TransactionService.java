@@ -1,7 +1,6 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.TransactionDto;
-import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.exceptions.TransactionNotFoundException;
 import com.example.jubileebudgetapp.models.Transaction;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
@@ -75,8 +74,6 @@ public class TransactionService {
         return convertTransactionToDto(updatedTransaction);
     }
 
-
-
     //helper methodes
     public Transaction convertDtoToTransaction(TransactionDto transactionDto){
         Transaction transaction = new Transaction();
@@ -134,7 +131,6 @@ public class TransactionService {
         }
     }
 
-    // calculate methodes used in balance
     public BigDecimal calculateTotalIncome() {
         return transactionRepository.calculateTotalIncome();
     }
