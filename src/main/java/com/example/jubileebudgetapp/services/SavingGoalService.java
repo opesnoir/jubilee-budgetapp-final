@@ -3,11 +3,43 @@ package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
 import com.example.jubileebudgetapp.models.SavingGoal;
+import com.example.jubileebudgetapp.repositories.AccountRepository;
+import com.example.jubileebudgetapp.repositories.SavingGoalRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SavingGoalService {
 
+    private SavingGoalRepository savingGoalRepository;
+    private final AccountRepository accountRepository;
+    private final AccountService accountService;
+
+    public SavingGoalService(SavingGoalRepository savingGoalRepository, AccountRepository accountRepository, AccountService accountService) {
+        this.savingGoalRepository = savingGoalRepository;
+        this.accountRepository = accountRepository;
+        this.accountService = accountService;
+    }
+
+    public List<SavingGoalDto> getSavingGoal(){
+        List<SavingGoal> savingGoals = savingGoalRepository.findAll();
+        return convertSavingGoalsToDtos(savingGoals);
+    }
+
+    private List<SavingGoalDto> convertSavingGoalsToDtos(List<SavingGoal> savingGoals) {
+        List<SavingGoalDto> savingGoalDtoList = new ArrayList<>();
+
+        for (SavingGoal savingGoal : savingGoals){
+            SavingGoalDto savingGoalDto = convertSavingGoalToDto(savingGoal);
+            if (savingGoal.getAccount() !=null){
+                savingGoalDto.setAccountDto(accountService.convertAccountToDto(savingGoal.getAccount()));
+            }
+            savingGoalDtoList.add(savingGoalDto);
+        }
+        return savingGoalDtoList;
+    }
 
 
     // helper methodes

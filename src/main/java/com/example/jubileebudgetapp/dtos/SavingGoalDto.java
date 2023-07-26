@@ -41,6 +41,6 @@ public class SavingGoalDto {
 
     @Valid
     private Account account;
+    private AccountDto accountDto;
     private Long accountId;
-
 }
