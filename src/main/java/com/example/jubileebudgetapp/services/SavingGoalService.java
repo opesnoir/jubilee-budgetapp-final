@@ -23,7 +23,7 @@ public class SavingGoalService {
         this.accountService = accountService;
     }
 
-    public List<SavingGoalDto> getSavingGoal(){
+    public List<SavingGoalDto> getSavingGoals(){
         List<SavingGoal> savingGoals = savingGoalRepository.findAll();
         return convertSavingGoalsToDtos(savingGoals);
     }
