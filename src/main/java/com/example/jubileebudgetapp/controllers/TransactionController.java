@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class TransactionController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/calculate-total-income")
+/*    @GetMapping("/calculate-total-income")
     public ResponseEntity<BigDecimal> calculateTotalIncome(){
         BigDecimal totalIncome = transactionService.calculateTotalIncome();
         return ResponseEntity.ok(totalIncome);
@@ -81,6 +80,6 @@ public class TransactionController {
     public ResponseEntity<BigDecimal> calculateBalance(){
         BigDecimal totalBalance = transactionService.calculateBalance();
         return ResponseEntity.ok(totalBalance);
-    }
+    }*/
 
 }

@@ -147,7 +147,7 @@ public class TransactionService {
         }
     }
 
-    public BigDecimal calculateTotalIncome() {
+/*    public BigDecimal calculateTotalIncome() {
         return transactionRepository.calculateTotalIncome();
     }
 
@@ -166,6 +166,6 @@ public class TransactionService {
             totalExpense = BigDecimal.ZERO;
         }
         return totalIncome.subtract(totalExpense);
-    }
+    }*/
 
 }

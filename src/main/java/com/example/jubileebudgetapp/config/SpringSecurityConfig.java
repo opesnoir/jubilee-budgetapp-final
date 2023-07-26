@@ -72,6 +72,10 @@ public class SpringSecurityConfig {
 
                 // balance
 
+                .requestMatchers(HttpMethod.GET, "/balances/calculate-total-income").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/balances/calculate-total-expense").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/balances/calculate-total-balance").hasRole("ADMIN")
+
                 // contract
                 .requestMatchers(HttpMethod.POST, "/contracts").hasRole("USER")
                 .requestMatchers(HttpMethod.PUT, "/contracts/{id}/{accountId}").hasAnyRole("ADMIN", "USER")
@@ -102,9 +106,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.PATCH, "/transactions/{id}").hasRole("USER")
                 .requestMatchers(HttpMethod.DELETE, "/transactions/{id}").hasAnyRole("ADMIN", "USER")
 
-                .requestMatchers(HttpMethod.GET, "/transactions/calculate-total-income").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/transactions/calculate-total-expense").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/transactions//calculate-total-balance").hasRole("ADMIN")
+
 
                 // upload
                 .requestMatchers(HttpMethod.POST, "/uploads").hasRole("USER")
