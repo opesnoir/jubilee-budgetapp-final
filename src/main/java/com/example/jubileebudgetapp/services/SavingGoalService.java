@@ -2,14 +2,18 @@ package com.example.jubileebudgetapp.services;
 
 
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.exceptions.SavingGoalNotFoundException;
+import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.SavingGoal;
+import com.example.jubileebudgetapp.models.Transaction;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.SavingGoalRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SavingGoalService {
@@ -118,4 +122,20 @@ public class SavingGoalService {
         }
     }
 
+
+    public void assignSavingGoalToAccount(Long id, Long accountId) {
+        Optional<SavingGoal> optionalSavingGoal = savingGoalRepository.findById(id);
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+        if (optionalSavingGoal.isPresent() && optionalAccount.isPresent()){
+            var savingGoal = optionalSavingGoal.get();
+            var account = optionalAccount.get();
+
+            savingGoal.setAccount(account);
+            savingGoalRepository.save(savingGoal);
+        } else {
+            throw new RecordNotFoundException();
+        }
+
+    }
 }
