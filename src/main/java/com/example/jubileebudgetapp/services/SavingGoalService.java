@@ -2,6 +2,7 @@ package com.example.jubileebudgetapp.services;
 
 
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
+import com.example.jubileebudgetapp.exceptions.SavingGoalNotFoundException;
 import com.example.jubileebudgetapp.models.SavingGoal;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.SavingGoalRepository;
@@ -41,6 +42,16 @@ public class SavingGoalService {
         return savingGoalDtoList;
     }
 
+    public SavingGoalDto getSavingGoal(Long id){
+        SavingGoal savingGoal = savingGoalRepository.findById(id)
+                .orElseThrow(() -> new SavingGoalNotFoundException(id));
+        SavingGoalDto savingGoalDto = convertSavingGoalToDto(savingGoal);
+
+        if (savingGoal.getGoal() !=null){
+            savingGoalDto.setAccountDto(accountService.convertAccountToDto(savingGoal.getAccount()));
+        }
+        return savingGoalDto;
+    }
 
     // helper methodes
     public SavingGoal convertDtoToSavingGoal(SavingGoalDto savingGoalDto){
