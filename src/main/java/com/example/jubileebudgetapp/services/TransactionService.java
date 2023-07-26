@@ -104,8 +104,6 @@ public class TransactionService {
         transactionDto.setType(transaction.getType());
         transactionDto.setPaymentMethod(transaction.getPaymentMethod());
 
-        transactionDto.setAccountId(transaction.getAccount().getId());
-
         return transactionDto;
     }
 
