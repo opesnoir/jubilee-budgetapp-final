@@ -64,6 +64,16 @@ public class SavingGoalService {
         savingGoalRepository.deleteById(id);
     }
 
+    public SavingGoalDto updateSavingGoal(Long id, SavingGoalDto updatedSavingGoalDto){
+        SavingGoal existingSavingGoal = savingGoalRepository.findById(id)
+                .orElseThrow(() -> new SavingGoalNotFoundException(id));
+
+        updateSavingGoalFromDto(existingSavingGoal, updatedSavingGoalDto);
+        SavingGoal updatedSavingGoal = savingGoalRepository.save(existingSavingGoal);
+
+        return convertSavingGoalToDto(updatedSavingGoal);
+    }
+
     // helper methodes
     public SavingGoal convertDtoToSavingGoal(SavingGoalDto savingGoalDto){
         SavingGoal savingGoal = new SavingGoal();
@@ -86,8 +96,6 @@ public class SavingGoalService {
         savingGoalDto.setCurrentAmount(savingGoal.getCurrentAmount());
         savingGoalDto.setTargetAmount(savingGoal.getTargetAmount());
         savingGoalDto.setStatus(savingGoal.getStatus());
-
-        savingGoalDto.setAccountId(savingGoal.getAccount().getId());
 
         return savingGoalDto;
     }
