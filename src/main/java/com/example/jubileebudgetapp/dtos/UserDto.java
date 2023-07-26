@@ -22,6 +22,7 @@ import java.util.Set;
 @Setter
 
 public class UserDto {
+
     @NotBlank
     @Size(min = 3, max = 50, message = " at least 3 to 50 characters long")
     public String username;

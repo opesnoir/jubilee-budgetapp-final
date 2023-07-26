@@ -12,12 +12,10 @@ import java.math.BigDecimal;
 public class BalanceService {
 
     private BalanceRepository balanceRepository;
-    private final TransactionService transactionService;
     private final TransactionRepository transactionRepository;
 
-    public BalanceService(BalanceRepository balanceRepository, TransactionService transactionService, TransactionRepository transactionRepository) {
+    public BalanceService(BalanceRepository balanceRepository, TransactionRepository transactionRepository) {
         this.balanceRepository = balanceRepository;
-        this.transactionService = transactionService;
         this.transactionRepository = transactionRepository;
     }
 
@@ -27,7 +25,6 @@ public class BalanceService {
 
         return convertBalanceToDto(balance);
     }
-
 
     //helper methods
     public BigDecimal calculateTotalIncome() {

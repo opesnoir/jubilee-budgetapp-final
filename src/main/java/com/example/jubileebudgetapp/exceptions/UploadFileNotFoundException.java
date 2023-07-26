@@ -15,5 +15,4 @@ public class UploadFileNotFoundException extends RuntimeException {
         super("File not found with ID: " + id);
     }
 
-
 }

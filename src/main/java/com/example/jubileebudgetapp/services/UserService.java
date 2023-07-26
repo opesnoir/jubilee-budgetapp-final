@@ -1,11 +1,8 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.UserDto;
-import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
-import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Authority;
 import com.example.jubileebudgetapp.models.User;
-import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.UserRepository;
 import com.example.jubileebudgetapp.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +13,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    private final AccountRepository accountRepository;
 
     @Autowired
     @Lazy
     private PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, AccountRepository accountRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.accountRepository = accountRepository;
     }
 
     public List<UserDto> getUsers(){
@@ -139,6 +133,5 @@ public class UserService {
             existingUser.setEmail(updatedUserDto.getEmail());
         }
     }
-
 
 }

@@ -1,6 +1,5 @@
 package com.example.jubileebudgetapp.controllers;
 
-
 import com.example.jubileebudgetapp.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

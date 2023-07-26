@@ -9,7 +9,6 @@ import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -146,26 +145,5 @@ public class TransactionService {
             throw new RecordNotFoundException();
         }
     }
-
-/*    public BigDecimal calculateTotalIncome() {
-        return transactionRepository.calculateTotalIncome();
-    }
-
-    public BigDecimal calculateTotalExpense(){
-        return transactionRepository.calculateTotalExpense();
-    }
-
-    public BigDecimal calculateBalance(){
-        BigDecimal totalIncome = calculateTotalIncome();
-        BigDecimal totalExpense = calculateTotalExpense();
-
-        if (totalIncome == null) {
-            totalIncome = BigDecimal.ZERO;
-        }
-        if (totalExpense == null) {
-            totalExpense = BigDecimal.ZERO;
-        }
-        return totalIncome.subtract(totalExpense);
-    }*/
 
 }

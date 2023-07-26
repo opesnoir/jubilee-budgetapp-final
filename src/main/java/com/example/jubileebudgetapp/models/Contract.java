@@ -19,6 +19,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "contracts")
 public class Contract {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,6 +34,5 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
-
 
 }

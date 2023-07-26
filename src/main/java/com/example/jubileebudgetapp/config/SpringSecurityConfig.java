@@ -106,8 +106,6 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.PATCH, "/transactions/{id}").hasRole("USER")
                 .requestMatchers(HttpMethod.DELETE, "/transactions/{id}").hasAnyRole("ADMIN", "USER")
 
-
-
                 // upload
                 .requestMatchers(HttpMethod.POST, "/uploads").hasRole("USER")
                 .requestMatchers(HttpMethod.GET, "/uploads/{id}/download").hasRole("USER")

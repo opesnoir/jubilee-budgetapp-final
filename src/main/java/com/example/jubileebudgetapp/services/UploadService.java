@@ -85,7 +85,7 @@ public class UploadService {
         uploadDto.setUpload(upload.getUpload());
         uploadDto.setFileName(upload.getFileName());
 
-        uploadDto.setAccountId(upload.getAccount().getId());
+/*        uploadDto.setAccountId(upload.getAccount().getId());*/
 
         return uploadDto;
     }
@@ -95,7 +95,7 @@ public class UploadService {
 
         uploadDto.setUpload(fileBytes);
         uploadDto.setFileName(fileName);
-        uploadDto.setAccountId(account.getId());
+/*        uploadDto.setAccountId(account.getId());*/
 
         return uploadDto;
     }

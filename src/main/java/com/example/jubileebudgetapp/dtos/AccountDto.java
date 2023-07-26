@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 
 public class AccountDto {
+
     private Long id;
     private String firstname;
     private String lastname;

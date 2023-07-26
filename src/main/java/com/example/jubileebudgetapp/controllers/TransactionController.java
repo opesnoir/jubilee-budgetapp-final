@@ -64,22 +64,4 @@ public class TransactionController {
         return ResponseEntity.noContent().build();
     }
 
-/*    @GetMapping("/calculate-total-income")
-    public ResponseEntity<BigDecimal> calculateTotalIncome(){
-        BigDecimal totalIncome = transactionService.calculateTotalIncome();
-        return ResponseEntity.ok(totalIncome);
-    }
-
-    @GetMapping("/calculate-total-expense")
-    public ResponseEntity<BigDecimal> calculateTotalExpense(){
-        BigDecimal totalExpense = transactionService.calculateTotalExpense();
-        return ResponseEntity.ok(totalExpense);
-    }
-
-    @GetMapping("/calculate-total-balance")
-    public ResponseEntity<BigDecimal> calculateBalance(){
-        BigDecimal totalBalance = transactionService.calculateBalance();
-        return ResponseEntity.ok(totalBalance);
-    }*/
-
 }

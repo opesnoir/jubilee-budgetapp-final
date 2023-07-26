@@ -25,7 +25,6 @@ public class AccountService {
         this.userRepository = userRepository;
     }
 
-
     public List<AccountDto> getAccounts(){
         List<Account> list = accountRepository.findAll();
         List<AccountDto> collection = new ArrayList<>();

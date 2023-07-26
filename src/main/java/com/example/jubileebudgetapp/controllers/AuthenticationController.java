@@ -19,9 +19,7 @@ import java.security.Principal;
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
-
     private final CustomUserDetailsService customUserDetailsService;
-
     private final JwtUtil jwtUtil;
 
     public AuthenticationController(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, JwtUtil jwtUtil) {
@@ -56,4 +54,5 @@ public class AuthenticationController {
         final String jwt = jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
+
 }

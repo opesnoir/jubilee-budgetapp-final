@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class SavingGoalDto {
+
     private Long id;
 
     @NotBlank(message = "Goal is required")
@@ -43,4 +44,5 @@ public class SavingGoalDto {
     private Account account;
     private AccountDto accountDto;
     private Long accountId;
+
 }

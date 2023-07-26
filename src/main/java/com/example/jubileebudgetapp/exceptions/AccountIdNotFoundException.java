@@ -15,5 +15,4 @@ public class AccountIdNotFoundException extends RuntimeException {
         super("Failed to find account with ID: " + id);
     }
 
-
 }

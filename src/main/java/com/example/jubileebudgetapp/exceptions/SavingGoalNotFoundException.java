@@ -12,7 +12,7 @@ public class SavingGoalNotFoundException extends RuntimeException {
     }
 
     public SavingGoalNotFoundException(Long id){
-        super("Failed to find savinggoal with ID: " + id);
+        super("Failed to find saving goal with ID: " + id);
     }
 
 }

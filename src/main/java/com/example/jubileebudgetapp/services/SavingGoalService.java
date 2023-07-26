@@ -6,7 +6,6 @@ import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.exceptions.SavingGoalNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.SavingGoal;
-import com.example.jubileebudgetapp.models.Transaction;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.SavingGoalRepository;
 import org.springframework.stereotype.Service;

@@ -16,6 +16,7 @@ import lombok.Setter;
 @Setter
 
 public class UploadDto {
+
     private Long id;
     private String fileName;
 
@@ -25,4 +26,5 @@ public class UploadDto {
     @Valid
     private Account account;
     private Long accountId;
+
 }

@@ -1,7 +1,6 @@
 package com.example.jubileebudgetapp.controllers;
 
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
-import com.example.jubileebudgetapp.dtos.TransactionDto;
 import com.example.jubileebudgetapp.services.SavingGoalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

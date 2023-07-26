@@ -64,5 +64,4 @@ public class ContractController {
         return ResponseEntity.noContent().build();
     }
 
-
 }
