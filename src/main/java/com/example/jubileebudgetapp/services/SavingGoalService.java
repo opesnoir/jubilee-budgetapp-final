@@ -53,6 +53,17 @@ public class SavingGoalService {
         return savingGoalDto;
     }
 
+    public SavingGoalDto createSavingGoal(SavingGoalDto savingGoalDto){
+        SavingGoal savingGoal = convertDtoToSavingGoal(savingGoalDto);
+        savingGoalRepository.save(savingGoal);
+
+        return convertSavingGoalToDto(savingGoal);
+    }
+
+    public void deleteSavingGoal(Long id){
+        savingGoalRepository.deleteById(id);
+    }
+
     // helper methodes
     public SavingGoal convertDtoToSavingGoal(SavingGoalDto savingGoalDto){
         SavingGoal savingGoal = new SavingGoal();
