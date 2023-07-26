@@ -73,8 +73,24 @@ public class SpringSecurityConfig {
                 // balance
 
                 // contract
+                .requestMatchers(HttpMethod.POST, "/contracts").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/contracts/{id}/{accountId}").hasAnyRole("ADMIN", "USER")
+
+                .requestMatchers(HttpMethod.GET, "/contracts").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/contracts/{id}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.PUT, "/contracts/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.PATCH, "/contracts/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.DELETE, "/contracts/{id}").hasAnyRole("ADMIN", "USER")
 
                 // saving goal
+                .requestMatchers(HttpMethod.POST, "/saving_goals").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/saving_goals/{id}/{accountId}").hasAnyRole("ADMIN", "USER")
+
+                .requestMatchers(HttpMethod.GET, "/saving_goals").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.GET, "/saving_goals/{id}").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.PUT, "/saving_goals/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.PATCH, "/saving_goals/{id}").hasRole("USER")
+                .requestMatchers(HttpMethod.DELETE, "/saving_goals/{id}").hasAnyRole("ADMIN", "USER")
 
                 // transaction
                 .requestMatchers(HttpMethod.POST, "/transactions").hasRole("USER")
