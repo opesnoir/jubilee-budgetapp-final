@@ -14,11 +14,9 @@ import java.net.URI;
 public class BalanceController {
 
     private final BalanceService balanceService;
-
     public BalanceController(BalanceService balanceService) {
         this.balanceService = balanceService;
     }
-
 
     @PostMapping
     public ResponseEntity<BalanceDto> createBalance(@RequestBody BalanceDto balanceDto){
@@ -31,7 +29,6 @@ public class BalanceController {
 
         return ResponseEntity.created(uri).body(createdBalanceDto);
     }
-
 
     @GetMapping("/calculate-total-income")
     public ResponseEntity<BigDecimal> calculateTotalIncome(){
@@ -50,4 +47,5 @@ public class BalanceController {
         BigDecimal totalBalance = balanceService.calculateBalance();
         return ResponseEntity.ok(totalBalance);
     }
+
 }

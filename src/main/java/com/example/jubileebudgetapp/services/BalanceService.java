@@ -51,7 +51,6 @@ public class BalanceService {
         return totalIncome.subtract(totalExpense);
     }
 
-
     public Balance convertDtoToBalance(BalanceDto balanceDto){
         Balance balance = new Balance();
 
