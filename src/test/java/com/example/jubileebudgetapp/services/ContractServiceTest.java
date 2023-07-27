@@ -86,7 +86,6 @@ class ContractServiceTest {
 
     @Test
     void createContract() {
-
         ContractDto contractDto = new ContractDto();
         contractDto.setPayee("Tele2");
         contractDto.setType("Phone contract");
@@ -112,7 +111,6 @@ class ContractServiceTest {
         assertEquals(contractDto.getStartDate(), savedContract.getStartDate());
         assertEquals(contractDto.getEndDate(), savedContract.getEndDate());
         assertEquals(contractDto.getAmount(), savedContract.getAmount());
-
     }
 
     @Test
@@ -164,7 +162,6 @@ class ContractServiceTest {
         contractService.assignAccountToContract(contractId, accountId);
         assertEquals(account, contract.getAccount());
         verify(contractRepository).save(contract);
-
     }
 
     @Test

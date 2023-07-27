@@ -48,7 +48,6 @@ class SavingGoalServiceTest {
 
     @BeforeEach
     void setUp(){
-
         savingGoalList = new ArrayList<>();
 
         account1 = new Account(1L, "Peter", "Pan", LocalDate.of(1902,1,14));
@@ -58,7 +57,6 @@ class SavingGoalServiceTest {
 
         savingGoalList.add(savingGoal1);
         savingGoalList.add(savingGoal2);
-
     }
 
     @Test
@@ -100,7 +98,6 @@ class SavingGoalServiceTest {
 
     @Test
     void createSavingGoal() {
-
         SavingGoalDto savingGoalDto = new SavingGoalDto();
         savingGoalDto.setGoal("Furniture");
         savingGoalDto.setDescription("Table for the living room");
@@ -126,7 +123,6 @@ class SavingGoalServiceTest {
         assertEquals(savingGoalDto.getCurrentAmount(), savedSavingGoal.getCurrentAmount());
         assertEquals(savingGoalDto.getTargetAmount(), savedSavingGoal.getTargetAmount());
         assertEquals(savingGoalDto.getStatus(), savedSavingGoal.getStatus());
-
     }
 
     @Test
