@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,7 +24,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doReturn;
 
+import java.util.Collections;
+import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -32,7 +37,7 @@ class SavingGoalControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
+    @MockBean
     SavingGoalService savingGoalService;
     @Autowired
     SavingGoalRepository savingGoalRepository;
@@ -82,6 +87,15 @@ class SavingGoalControllerTest {
                 .andExpect(jsonPath("$[1].currentAmount").value(25))
                 .andExpect(jsonPath("$[1].targetAmount").value(85))
                 .andExpect(jsonPath("$[1].status").value("COMPLETED"));
+    }
+
+    @Test
+    void getSavingGoalsWithEmptyList() throws Exception {
+
+        when(savingGoalService.getSavingGoals()).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/saving_goals"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
