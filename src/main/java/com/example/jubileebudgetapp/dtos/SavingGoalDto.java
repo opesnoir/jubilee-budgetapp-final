@@ -45,4 +45,13 @@ public class SavingGoalDto {
     private AccountDto accountDto;
     private Long accountId;
 
+    public SavingGoalDto(Long id, String goal, String description, BigDecimal currentAmount, BigDecimal targetAmount, SavingGoalStatus status, Account account) {
+        this.id = id;
+        this.goal = goal;
+        this.description = description;
+        this.currentAmount = currentAmount;
+        this.targetAmount = targetAmount;
+        this.status = status;
+        this.account = account;
+    }
 }
