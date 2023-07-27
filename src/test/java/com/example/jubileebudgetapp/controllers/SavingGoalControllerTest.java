@@ -1,6 +1,5 @@
 package com.example.jubileebudgetapp.controllers;
 
-
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.SavingGoal;
@@ -22,6 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+
 
 
 @SpringBootTest
@@ -66,7 +67,21 @@ class SavingGoalControllerTest {
     }
 
     @Test
-    void getSavingGoals() {
+    void getSavingGoals() throws Exception {
+
+        mockMvc.perform(get("/saving_goals"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].goal").value("holiday"))
+                .andExpect(jsonPath("$[0].description").value("holiday trip to Bora Bora"))
+                .andExpect(jsonPath("$[0].currentAmount").value(1000))
+                .andExpect(jsonPath("$[0].targetAmount").value(2500))
+                .andExpect(jsonPath("$[0].status").value("ACTIVE"))
+
+                .andExpect(jsonPath("$[1].goal").value("bike repair"))
+                .andExpect(jsonPath("$[1].description").value("repairing bike and replacing tire"))
+                .andExpect(jsonPath("$[1].currentAmount").value(25))
+                .andExpect(jsonPath("$[1].targetAmount").value(85))
+                .andExpect(jsonPath("$[1].status").value("COMPLETED"));
     }
 
     @Test
@@ -81,6 +96,7 @@ class SavingGoalControllerTest {
                 .andExpect(jsonPath("targetAmount").value(2500))
                 .andExpect(jsonPath("status").value("ACTIVE"));
     }
+
 
     @Test
     void createSavingGoal() {
