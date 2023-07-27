@@ -19,7 +19,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -35,6 +37,7 @@ class SavingGoalServiceTest {
     SavingGoalService savingGoalService;
     @Captor
     ArgumentCaptor<SavingGoal> captor;
+    List<SavingGoal> savingGoalList = new ArrayList<>();
 
     SavingGoal savingGoal1;
     SavingGoal savingGoal2;
@@ -44,15 +47,15 @@ class SavingGoalServiceTest {
     @BeforeEach
     void setUp(){
 
-/*        savingGoalList = new ArrayList<>();*/
+        savingGoalList = new ArrayList<>();
 
         account1 = new Account(1L, "Peter", "Pan", LocalDate.of(1902,1,14));
 
         savingGoal1 = new SavingGoal(1L, "holiday", "holiday trip to Bora Bora", BigDecimal.valueOf(1000), BigDecimal.valueOf(2500), savingGoalStatus.ACTIVE, account1);
         savingGoal2 = new SavingGoal(2L, "bike repair", "repairing bike and replacing tire", BigDecimal.valueOf(25), BigDecimal.valueOf(85), savingGoalStatus.COMPLETED, account1);
 
-/*        savingGoalList.add(savingGoal1);
-        savingGoalList.add(savingGoal2);*/
+        savingGoalList.add(savingGoal1);
+        savingGoalList.add(savingGoal2);
 
     }
 
@@ -73,8 +76,29 @@ class SavingGoalServiceTest {
     }
 
     @Test
-    void getSavingGoal() {
+    void getAllSavingGoals_emptyList() {
+        // Arrange
+        when(savingGoalRepository.findAll()).thenReturn(Collections.emptyList());
+        // Act
+        List<SavingGoalDto> savingGoalDtos = savingGoalService.getSavingGoals();
+        // Assert
+        assertTrue(savingGoalDtos.isEmpty());
     }
+
+    @Test
+    void getSavingGoal() {
+        when(savingGoalRepository.findById(1L)).thenReturn(Optional.of(savingGoalList.get(0)));
+
+        SavingGoalDto savingGoalDto = savingGoalService.getSavingGoal(1L);
+
+        assertEquals(savingGoalList.get(0).getGoal(), savingGoalDto.getGoal());
+        assertEquals(savingGoalList.get(0).getDescription(), savingGoalDto.getDescription());
+        assertEquals(savingGoalList.get(0).getCurrentAmount(), savingGoalDto.getCurrentAmount());
+        assertEquals(savingGoalList.get(0).getTargetAmount(), savingGoalDto.getTargetAmount());
+        assertEquals(savingGoalList.get(0).getStatus(), savingGoalDto.getStatus());
+
+    }
+
 
     @Test
     void createSavingGoal() {

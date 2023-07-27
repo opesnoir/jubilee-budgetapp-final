@@ -48,12 +48,11 @@ public class SavingGoalService {
     public SavingGoalDto getSavingGoal(Long id){
         SavingGoal savingGoal = savingGoalRepository.findById(id)
                 .orElseThrow(() -> new SavingGoalNotFoundException(id));
-        SavingGoalDto savingGoalDto = convertSavingGoalToDto(savingGoal);
 
-        if (savingGoal.getGoal() !=null){
+/*        if (savingGoal.getGoal() !=null){
             savingGoalDto.setAccountDto(accountService.convertAccountToDto(savingGoal.getAccount()));
-        }
-        return savingGoalDto;
+        }*/
+        return convertSavingGoalToDto(savingGoal);
     }
 
     public SavingGoalDto createSavingGoal(SavingGoalDto savingGoalDto){
