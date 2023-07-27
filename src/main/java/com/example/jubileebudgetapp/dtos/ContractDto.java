@@ -33,4 +33,14 @@ public class ContractDto {
     private AccountDto accountDto;
     private Long accountId;
 
+    public ContractDto(Long id, String payee, String type, LocalDate startDate, LocalDate endDate, BigDecimal amount, Account account) {
+        this.id = id;
+        this.payee = payee;
+        this.type = type;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.amount = amount;
+        this.account = account;
+    }
+
 }
