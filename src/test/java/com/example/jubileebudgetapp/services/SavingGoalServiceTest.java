@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SavingGoalServiceTest {
@@ -102,6 +103,35 @@ class SavingGoalServiceTest {
 
     @Test
     void createSavingGoal() {
+        SavingGoalDto savingGoalDto = new SavingGoalDto();
+        savingGoalDto.setGoal("Furniture");
+        savingGoalDto.setDescription("Table for the living room");
+        savingGoalDto.setCurrentAmount(BigDecimal.valueOf(50));
+        savingGoalDto.setTargetAmount(BigDecimal.valueOf(100));
+        savingGoalDto.setStatus(savingGoalStatus.COMPLETED);
+
+        when(savingGoalRepository.save(any(SavingGoal.class))).thenReturn(savingGoal1);
+
+        SavingGoalDto createdSavingGoalDto = savingGoalService.createSavingGoal(savingGoalDto);
+        assertEquals(savingGoalDto.getGoal(), createdSavingGoalDto.getGoal());
+        assertEquals(savingGoalDto.getDescription(), createdSavingGoalDto.getDescription());
+        assertEquals(savingGoalDto.getCurrentAmount(), createdSavingGoalDto.getCurrentAmount());
+        assertEquals(savingGoalDto.getTargetAmount(), createdSavingGoalDto.getTargetAmount());
+        assertEquals(savingGoalDto.getStatus(), createdSavingGoalDto.getStatus());
+
+        verify(savingGoalRepository, times(1)).save(captor.capture());
+
+        SavingGoal savedSavingGoal = captor.getValue();
+        assertNotNull(savedSavingGoal);
+        assertEquals(savingGoalDto.getGoal(), savedSavingGoal.getGoal());
+        assertEquals(savingGoalDto.getDescription(), savedSavingGoal.getDescription());
+        assertEquals(savingGoalDto.getCurrentAmount(), savedSavingGoal.getCurrentAmount());
+        assertEquals(savingGoalDto.getTargetAmount(), savedSavingGoal.getTargetAmount());
+        assertEquals(savingGoalDto.getStatus(), savedSavingGoal.getStatus());
+
+
+
+
     }
 
     @Test
