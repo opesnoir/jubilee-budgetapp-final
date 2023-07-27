@@ -37,9 +37,9 @@ public class SavingGoalService {
 
         for (SavingGoal savingGoal : savingGoals){
             SavingGoalDto savingGoalDto = convertSavingGoalToDto(savingGoal);
-            if (savingGoal.getAccount() !=null){
+/*            if (savingGoal.getAccount() !=null){
                 savingGoalDto.setAccountDto(accountService.convertAccountToDto(savingGoal.getAccount()));
-            }
+            }*/
             savingGoalDtoList.add(savingGoalDto);
         }
         return savingGoalDtoList;
