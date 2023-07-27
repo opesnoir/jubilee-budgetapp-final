@@ -23,9 +23,7 @@ public class TransactionController {
     @GetMapping
     public ResponseEntity<List<TransactionDto>> getTransactions(){
         List<TransactionDto> transactionDtoList = transactionService.getTransactions();
-        if(transactionDtoList.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
+
         return new ResponseEntity<>(transactionDtoList, HttpStatus.OK);
     }
 

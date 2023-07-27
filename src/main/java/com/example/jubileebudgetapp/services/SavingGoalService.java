@@ -19,12 +19,10 @@ public class SavingGoalService {
 
     private SavingGoalRepository savingGoalRepository;
     private final AccountRepository accountRepository;
-    private final AccountService accountService;
 
-    public SavingGoalService(SavingGoalRepository savingGoalRepository, AccountRepository accountRepository, AccountService accountService) {
+    public SavingGoalService(SavingGoalRepository savingGoalRepository, AccountRepository accountRepository) {
         this.savingGoalRepository = savingGoalRepository;
         this.accountRepository = accountRepository;
-        this.accountService = accountService;
     }
 
     public List<SavingGoalDto> getSavingGoals(){
@@ -37,9 +35,7 @@ public class SavingGoalService {
 
         for (SavingGoal savingGoal : savingGoals){
             SavingGoalDto savingGoalDto = convertSavingGoalToDto(savingGoal);
-/*            if (savingGoal.getAccount() !=null){
-                savingGoalDto.setAccountDto(accountService.convertAccountToDto(savingGoal.getAccount()));
-            }*/
+
             savingGoalDtoList.add(savingGoalDto);
         }
         return savingGoalDtoList;
@@ -49,9 +45,6 @@ public class SavingGoalService {
         SavingGoal savingGoal = savingGoalRepository.findById(id)
                 .orElseThrow(() -> new SavingGoalNotFoundException(id));
 
-/*        if (savingGoal.getGoal() !=null){
-            savingGoalDto.setAccountDto(accountService.convertAccountToDto(savingGoal.getAccount()));
-        }*/
         return convertSavingGoalToDto(savingGoal);
     }
 
@@ -119,7 +112,6 @@ public class SavingGoalService {
             existingSavingGoal.setStatus(updatedSavingGoalDto.getStatus());
         }
     }
-
 
     public void assignSavingGoalToAccount(Long id, Long accountId) {
         Optional<SavingGoal> optionalSavingGoal = savingGoalRepository.findById(id);

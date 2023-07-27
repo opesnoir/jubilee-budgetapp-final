@@ -18,12 +18,10 @@ public class TransactionService {
 
     private TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
-    private final AccountService accountService;
 
-    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository, AccountService accountService) {
+    public TransactionService(TransactionRepository transactionRepository, AccountRepository accountRepository) {
         this.transactionRepository = transactionRepository;
         this.accountRepository = accountRepository;
-        this.accountService = accountService;
     }
 
     public List<TransactionDto> getTransactions(){
@@ -36,9 +34,7 @@ public class TransactionService {
 
         for (Transaction transaction : transactions){
             TransactionDto transactionDto = convertTransactionToDto(transaction);
-            if (transaction.getAccount() !=null){
-                transactionDto.setAccountDto(accountService.convertAccountToDto(transaction.getAccount()));
-            }
+
             transactionDtoList.add(transactionDto);
         }
         return transactionDtoList;
@@ -47,12 +43,8 @@ public class TransactionService {
     public TransactionDto getTransaction(Long id) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
-        TransactionDto transactionDto = convertTransactionToDto(transaction);
 
-        if (transaction.getAccount() != null) {
-            transactionDto.setAccountDto(accountService.convertAccountToDto(transaction.getAccount()));
-        }
-        return transactionDto;
+        return convertTransactionToDto(transaction);
     }
 
     public TransactionDto createTransaction(TransactionDto transactionDto){

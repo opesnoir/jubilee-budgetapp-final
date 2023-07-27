@@ -23,9 +23,7 @@ public class SavingGoalController {
     @GetMapping
     public ResponseEntity<List<SavingGoalDto>> getSavingGoals(){
         List<SavingGoalDto> savingGoalDtoList = savingGoalService.getSavingGoals();
-        if (savingGoalDtoList.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
+
         return new ResponseEntity<>(savingGoalDtoList, HttpStatus.OK);
     }
 

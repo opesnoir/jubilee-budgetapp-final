@@ -18,12 +18,10 @@ public class ContractService {
 
     private ContractRepository contractRepository;
     private final AccountRepository accountRepository;
-    private final AccountService accountService;
 
-    public ContractService(ContractRepository contractRepository, AccountRepository accountRepository, AccountService accountService) {
+    public ContractService(ContractRepository contractRepository, AccountRepository accountRepository) {
         this.contractRepository = contractRepository;
         this.accountRepository = accountRepository;
-        this.accountService = accountService;
     }
 
     public List<ContractDto> getContracts() {
@@ -36,9 +34,7 @@ public class ContractService {
 
         for (Contract contract : contracts){
             ContractDto contractDto = convertContractToDto(contract);
-            if (contract.getAccount() !=null){
-                contractDto.setAccountDto(accountService.convertAccountToDto(contract.getAccount()));
-            }
+
             contractDtoList.add(contractDto);
         }
         return contractDtoList;
@@ -47,12 +43,8 @@ public class ContractService {
     public ContractDto getContract(Long id) {
         Contract contract = contractRepository.findById(id)
                 .orElseThrow(() -> new ContractNotFoundException(id));
-        ContractDto contractDto = convertContractToDto(contract);
 
-        if (contract.getAccount() !=null){
-            contractDto.setAccountDto(accountService.convertAccountToDto(contract.getAccount()));
-        }
-        return contractDto;
+        return convertContractToDto(contract);
     }
 
     public ContractDto createContract(ContractDto contractDto) {

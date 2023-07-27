@@ -23,9 +23,7 @@ public class ContractController {
     @GetMapping
     public ResponseEntity<List<ContractDto>> getContracts(){
         List<ContractDto> contractDtoList = contractService.getContracts();
-        if (contractDtoList.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
+
         return new ResponseEntity<>(contractDtoList, HttpStatus.OK);
     }
 
