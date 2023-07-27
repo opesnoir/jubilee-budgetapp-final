@@ -50,8 +50,8 @@ public class UploadController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UploadDto> deleteFile(@PathVariable("id") Long id) throws FileNotFoundException {
-        UploadDto deletedFileDto = uploadService.deleteFile(id);
-        return ResponseEntity.ok(deletedFileDto);
+        uploadService.deleteFile(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
