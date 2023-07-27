@@ -100,6 +100,7 @@ class SavingGoalServiceTest {
 
     @Test
     void createSavingGoal() {
+
         SavingGoalDto savingGoalDto = new SavingGoalDto();
         savingGoalDto.setGoal("Furniture");
         savingGoalDto.setDescription("Table for the living room");
@@ -125,6 +126,7 @@ class SavingGoalServiceTest {
         assertEquals(savingGoalDto.getCurrentAmount(), savedSavingGoal.getCurrentAmount());
         assertEquals(savingGoalDto.getTargetAmount(), savedSavingGoal.getTargetAmount());
         assertEquals(savingGoalDto.getStatus(), savedSavingGoal.getStatus());
+
     }
 
     @Test
@@ -133,8 +135,6 @@ class SavingGoalServiceTest {
 
         verify(savingGoalRepository).deleteById(1L);
     }
-
-
 
     @Test
     void updateSavingGoal() {
