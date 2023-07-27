@@ -87,7 +87,9 @@ class SavingGoalControllerTest {
     }
 
     @Test
-    void deleteSavingGoal() {
+    void deleteSavingGoal() throws Exception{
+        mockMvc.perform(delete("/saving_goals/1"))
+                .andExpect(status().isNoContent());
     }
 
     @Test
