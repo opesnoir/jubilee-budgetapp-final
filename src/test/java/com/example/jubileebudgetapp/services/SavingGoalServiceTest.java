@@ -136,7 +136,11 @@ class SavingGoalServiceTest {
 
     @Test
     void deleteSavingGoal() {
+        savingGoalService.deleteSavingGoal(1L);
+        verify(savingGoalRepository).deleteById(1L);
     }
+
+
 
     @Test
     void updateSavingGoal() {
