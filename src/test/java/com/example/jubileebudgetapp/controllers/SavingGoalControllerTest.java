@@ -18,6 +18,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -30,7 +35,6 @@ class SavingGoalControllerTest {
     SavingGoalService savingGoalService;
     @Autowired
     SavingGoalRepository savingGoalRepository;
-    @Autowired
     SavingGoalStatus savingGoalStatus;
     @Autowired
     AccountRepository accountRepository;
@@ -50,15 +54,14 @@ class SavingGoalControllerTest {
         account1 = new Account();
         accountRepository.save(account1);
 
-        savingGoal1 = new SavingGoal(1L, "holiday", "holiday trip to Bora Bora", BigDecimal.valueOf(1000), BigDecimal.valueOf(2500), SavingGoalStatus.ACTIVE, account1);
-        savingGoal2 = new SavingGoal(1L, "bike repair", "repairing bike and replacing tire", BigDecimal.valueOf(25), BigDecimal.valueOf(85), SavingGoalStatus.COMPLETED, account1);
+        savingGoal1 = new SavingGoal(1L, "holiday", "holiday trip to Bora Bora", BigDecimal.valueOf(1000), BigDecimal.valueOf(2500), savingGoalStatus.ACTIVE, account1);
+        savingGoal2 = new SavingGoal(2L, "bike repair", "repairing bike and replacing tire", BigDecimal.valueOf(25), BigDecimal.valueOf(85), savingGoalStatus.COMPLETED, account1);
 
         savingGoal1 = savingGoalRepository.save(savingGoal1);
         savingGoal2 = savingGoalRepository.save(savingGoal2);
 
-        savingGoalDto1 = new SavingGoalDto(1L, "holiday", "holiday trip to Bora Bora", BigDecimal.valueOf(1000), BigDecimal.valueOf(2500), SavingGoalStatus.ACTIVE, account1);
-
-        savingGoalDto2 = new SavingGoalDto(1L, "bike repair", "repairing bike and replacing tire", BigDecimal.valueOf(25), BigDecimal.valueOf(85), SavingGoalStatus.COMPLETED, account1);
+        savingGoalDto1 = new SavingGoalDto(savingGoal1.getId(), "holiday", "holiday trip to Bora Bora", BigDecimal.valueOf(1000), BigDecimal.valueOf(2500), savingGoalStatus.ACTIVE, account1);
+        savingGoalDto2 = new SavingGoalDto(savingGoal2.getId(), "bike repair", "repairing bike and replacing tire", BigDecimal.valueOf(25), BigDecimal.valueOf(85), savingGoalStatus.COMPLETED, account1);
 
     }
 
@@ -67,7 +70,16 @@ class SavingGoalControllerTest {
     }
 
     @Test
-    void getSavingGoal() {
+    void getSavingGoal() throws Exception{
+        Long id = savingGoal1.getId();
+
+        mockMvc.perform(get("/saving_goals/{id}", id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("goal").value("holiday"))
+                .andExpect(jsonPath("description").value("holiday trip to Bora Bora"))
+                .andExpect(jsonPath("currentAmount").value(1000))
+                .andExpect(jsonPath("targetAmount").value(2500))
+                .andExpect(jsonPath("status").value("ACTIVE"));
     }
 
     @Test
