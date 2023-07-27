@@ -134,6 +134,5 @@ public class SavingGoalService {
         } else {
             throw new RecordNotFoundException();
         }
-
     }
 }

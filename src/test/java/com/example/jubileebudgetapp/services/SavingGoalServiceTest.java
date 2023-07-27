@@ -1,6 +1,7 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.SavingGoalDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.SavingGoal;
 import com.example.jubileebudgetapp.models.SavingGoalStatus;
@@ -62,7 +63,6 @@ class SavingGoalServiceTest {
 
     @Test
     void getSavingGoals() {
-
         when(savingGoalRepository.findAll()).thenReturn(List.of(savingGoal1, savingGoal2));
 
         List<SavingGoal> savingGoalList = savingGoalRepository.findAll();
@@ -73,16 +73,14 @@ class SavingGoalServiceTest {
         assertEquals(savingGoalList.get(0).getCurrentAmount(), savingGoalDtos.get(0).getCurrentAmount());
         assertEquals(savingGoalList.get(0).getTargetAmount(), savingGoalDtos.get(0).getTargetAmount());
         assertEquals(savingGoalList.get(0).getStatus(), savingGoalDtos.get(0).getStatus());
-
     }
 
     @Test
     void getAllSavingGoals_emptyList() {
-        // Arrange
         when(savingGoalRepository.findAll()).thenReturn(Collections.emptyList());
-        // Act
+
         List<SavingGoalDto> savingGoalDtos = savingGoalService.getSavingGoals();
-        // Assert
+
         assertTrue(savingGoalDtos.isEmpty());
     }
 
@@ -97,7 +95,6 @@ class SavingGoalServiceTest {
         assertEquals(savingGoalList.get(0).getCurrentAmount(), savingGoalDto.getCurrentAmount());
         assertEquals(savingGoalList.get(0).getTargetAmount(), savingGoalDto.getTargetAmount());
         assertEquals(savingGoalList.get(0).getStatus(), savingGoalDto.getStatus());
-
     }
 
 
@@ -128,15 +125,12 @@ class SavingGoalServiceTest {
         assertEquals(savingGoalDto.getCurrentAmount(), savedSavingGoal.getCurrentAmount());
         assertEquals(savingGoalDto.getTargetAmount(), savedSavingGoal.getTargetAmount());
         assertEquals(savingGoalDto.getStatus(), savedSavingGoal.getStatus());
-
-
-
-
     }
 
     @Test
     void deleteSavingGoal() {
         savingGoalService.deleteSavingGoal(1L);
+
         verify(savingGoalRepository).deleteById(1L);
     }
 
@@ -144,21 +138,72 @@ class SavingGoalServiceTest {
 
     @Test
     void updateSavingGoal() {
+        Long id = 1L;
+        SavingGoal existingSavingGoal = new SavingGoal();
+        when(savingGoalRepository.findById(id)).thenReturn(Optional.of(existingSavingGoal));
+
+        SavingGoalDto updatedSavingGoalDto = new SavingGoalDto();
+        updatedSavingGoalDto.setGoal("Jewellery");
+        updatedSavingGoalDto.setDescription("Golden ring");
+        updatedSavingGoalDto.setCurrentAmount(BigDecimal.valueOf(100));
+        updatedSavingGoalDto.setTargetAmount(BigDecimal.valueOf(500));
+        updatedSavingGoalDto.setStatus(savingGoalStatus.COMPLETED);
+
+        SavingGoal savedSavingGoal = new SavingGoal();
+        when(savingGoalRepository.save(existingSavingGoal)).thenReturn(savedSavingGoal);
+
+        SavingGoalDto result = savingGoalService.updateSavingGoal(id, updatedSavingGoalDto);
+
+        assertNotNull(result);
+        assertEquals(updatedSavingGoalDto.getGoal(), existingSavingGoal.getGoal());
+        assertEquals(updatedSavingGoalDto.getDescription(), existingSavingGoal.getDescription());
+        assertEquals(updatedSavingGoalDto.getCurrentAmount(), existingSavingGoal.getCurrentAmount());
+        assertEquals(updatedSavingGoalDto.getTargetAmount(), existingSavingGoal.getTargetAmount());
+        assertEquals(updatedSavingGoalDto.getStatus(), existingSavingGoal.getStatus());
+
+        verify(savingGoalRepository).save(existingSavingGoal);
     }
 
     @Test
-    void convertDtoToSavingGoal() {
+    void assignSavingGoalToAccount_existingSavingGoalAndAccount() {
+        Long savingGoalId = 1L;
+        Long accountId = 2L;
+
+        SavingGoal savingGoal = new SavingGoal();
+        when(savingGoalRepository.findById(savingGoalId)).thenReturn(Optional.of(savingGoal));
+
+        Account account = new Account();
+        when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
+
+        savingGoalService.assignSavingGoalToAccount(savingGoalId, accountId);
+
+        assertEquals(account, savingGoal.getAccount());
+        verify(savingGoalRepository).save(savingGoal);
     }
 
     @Test
-    void convertSavingGoalToDto() {
+    void assignSavingGoalToAccount_missingAccount() {
+        Long savingGoalId = 1L;
+        Long accountId = 2L;
+
+        SavingGoal savingGoal = new SavingGoal();
+        when(savingGoalRepository.findById(savingGoalId)).thenReturn(Optional.of(savingGoal));
+
+        assertThrows(RecordNotFoundException.class, () -> savingGoalService.assignSavingGoalToAccount(savingGoalId, accountId));
+
+        verify(savingGoalRepository, never()).save(any(SavingGoal.class));
     }
 
     @Test
-    void updateSavingGoalFromDto() {
-    }
+    void assignSavingGoalToAccount_missingSavingGoal() {
+        Long savingGoalId = 1L;
+        Long accountId = 2L;
 
-    @Test
-    void assignSavingGoalToAccount() {
+        Account account = new Account();
+        when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
+
+        assertThrows(RecordNotFoundException.class, () -> savingGoalService.assignSavingGoalToAccount(savingGoalId, accountId));
+
+        verify(savingGoalRepository, never()).save(any(SavingGoal.class));
     }
 }
