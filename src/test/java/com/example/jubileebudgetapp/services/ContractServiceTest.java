@@ -1,9 +1,13 @@
 package com.example.jubileebudgetapp.services;
 
+import com.example.jubileebudgetapp.dtos.ContractDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Contract;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.ContractRepository;
+import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ContractServiceTest {
@@ -36,9 +41,8 @@ class ContractServiceTest {
     Contract contract2;
     Account account1;
 
-    @Test
-    void getContracts() {
-
+    @BeforeEach
+    void setUp(){
         contractList = new ArrayList<>();
 
         account1 = new Account(1L, "Peter", "Pan", LocalDate.of(1902,1,14));
@@ -48,18 +52,26 @@ class ContractServiceTest {
 
         contractList.add(contract1);
         contractList.add(contract2);
+    }
+
+    @Test
+    void getContracts() {
+        when(contractRepository.findAll()).thenReturn(List.of(contract1, contract2));
+
+        List<Contract> contractList = contractRepository.findAll();
+        List<ContractDto> contractDtos = contractService.getContracts();
+
+        assertEquals(contractList.get(0).getPayee(), contractDtos.get(0).getPayee());
+        assertEquals(contractList.get(0).getType(), contractDtos.get(0).getType());
+        assertEquals(contractList.get(0).getStartDate(), contractDtos.get(0).getStartDate());
+        assertEquals(contractList.get(0).getEndDate(), contractDtos.get(0).getEndDate());
+        assertEquals(contractList.get(0).getAmount(), contractDtos.get(0).getAmount());
 
     }
 
     @Test
     void getContract() {
 
-        /*        this.payee = payee;
-        this.type = type;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.amount = amount;
-        this.account = account;*/
     }
 
     @Test
