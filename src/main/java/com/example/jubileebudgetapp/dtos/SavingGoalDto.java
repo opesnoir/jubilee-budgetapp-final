@@ -54,4 +54,5 @@ public class SavingGoalDto {
         this.status = status;
         this.account = account;
     }
+
 }

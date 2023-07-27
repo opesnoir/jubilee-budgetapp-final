@@ -47,4 +47,11 @@ public class Account {
     @JsonIgnore
     private User user;
 
+    public Account(Long id, String firstname, String lastname, LocalDate dateCreated) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dateCreated = dateCreated;
+    }
+
 }
