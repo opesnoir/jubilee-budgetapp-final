@@ -2,6 +2,7 @@ package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.UploadDto;
 import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
+import com.example.jubileebudgetapp.exceptions.UnsupportedFileTypeException;
 import com.example.jubileebudgetapp.exceptions.UploadFileNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Upload;
@@ -9,11 +10,13 @@ import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.UploadRepository;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 public class UploadService {
@@ -30,6 +33,10 @@ public class UploadService {
         try{
             Account account = accountRepository.findById(accountId)
                     .orElseThrow(() -> new AccountIdNotFoundException(accountId));
+
+            if (!Objects.equals(file.getContentType(), MediaType.APPLICATION_PDF_VALUE)) {
+                throw new UnsupportedFileTypeException("Uploaded file must be a PDF.");
+            }
 
             byte[] fileBytes = file.getBytes();
             String fileName = file.getOriginalFilename();
