@@ -27,10 +27,4 @@ public class File {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public File(Long id, String filename, byte[] docFile) {
-        this.id = id;
-        this.filename = filename;
-        this.docFile = docFile;
-    }
-
 }
