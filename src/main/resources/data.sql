@@ -50,8 +50,12 @@ VALUES (250.00, 'work', '2023-08-28', 'selling menhirs with Obelix', 'Obelix & C
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
 VALUES (50.00, 'groceries', '2023-07-28', 'buying fruit, vegetables and a cake', 'Ekoplaza, Duck Cakes', 'CASH','EXPENSE', 3);
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
-VALUES (50.00, 'work', '2023-08-28', 'working for Dagobert Duck', 'Dagobert Duck', 'BANK','INCOME', 3);
+VALUES (500.00, 'work', '2023-08-28', 'working for Dagobert Duck', 'Dagobert Duck', 'BANK','INCOME', 3);
 
 -- balance
+INSERT INTO balances (total_expense, total_income, balance)
+VALUES (57.00, 250.00, 203.00)
 
 -- uploads
+
+
