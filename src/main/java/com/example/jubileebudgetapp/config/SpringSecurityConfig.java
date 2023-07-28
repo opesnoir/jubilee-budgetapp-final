@@ -111,6 +111,9 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/uploads/{id}/download").hasRole("USER")
                 .requestMatchers(HttpMethod.DELETE, "/uploads/{id}").hasRole("USER")
 
+                // file
+                .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("USER")
+
                 // authentication
                 .requestMatchers("/authenticated").authenticated()
                 .requestMatchers("/authenticate").permitAll()
