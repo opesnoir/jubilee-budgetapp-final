@@ -73,9 +73,6 @@ public class AccountService {
         if (account.getBalance() != null){
             accountDto.setBalance(account.getBalance());
         }
-        if (account.getUser() != null) {
-            accountDto.setUserDto(UserService.convertUserToDto(account.getUser()));
-        }
 
         return accountDto;
     }
