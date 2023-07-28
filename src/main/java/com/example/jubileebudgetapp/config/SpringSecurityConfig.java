@@ -113,6 +113,7 @@ public class SpringSecurityConfig {
 
                 // file
                 .requestMatchers(HttpMethod.POST, "/single/uploadDB").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/downloadFromDb/{fileId}").hasRole("USER")
 
                 // authentication
                 .requestMatchers("/authenticated").authenticated()

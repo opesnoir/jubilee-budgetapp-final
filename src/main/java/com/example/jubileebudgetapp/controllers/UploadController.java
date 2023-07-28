@@ -5,6 +5,7 @@ import com.example.jubileebudgetapp.exceptions.UploadFileNotFoundException;
 import com.example.jubileebudgetapp.services.UploadService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,11 +43,13 @@ public class UploadController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentDispositionFormData("attachment", fileResource.getFilename());
+        headers.setContentType(MediaType.APPLICATION_PDF);
 
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(fileResource);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UploadDto> deleteFile(@PathVariable("id") Long id) throws FileNotFoundException {
