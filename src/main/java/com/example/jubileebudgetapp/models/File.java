@@ -1,14 +1,17 @@
 package com.example.jubileebudgetapp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Getter
 @Setter
+
 @Entity
 public class File {
     @Id
@@ -19,5 +22,15 @@ public class File {
 
     @Lob
     private byte[] docFile;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    public File(Long id, String filename, byte[] docFile) {
+        this.id = id;
+        this.filename = filename;
+        this.docFile = docFile;
+    }
 
 }
