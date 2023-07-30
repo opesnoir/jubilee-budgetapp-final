@@ -1,6 +1,8 @@
 package com.example.jubileebudgetapp.dtos;
 
+import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Transaction;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +29,15 @@ public class BalanceDto {
 
     private List<Transaction> transactionList;
 
+    @Valid
+    private Account account;
+    private AccountDto accountDto;
+    private Long accountId;
+
+    public BalanceDto(Long id, BigDecimal totalExpense, BigDecimal totalIncome, Account account) {
+        this.id = id;
+        this.totalExpense = totalExpense;
+        this.totalIncome = totalIncome;
+        this.account = account;
+    }
 }

@@ -48,4 +48,10 @@ public class BalanceController {
         return ResponseEntity.ok(totalBalance);
     }
 
+    @PutMapping("/{id}/{accountId}")
+    public ResponseEntity<Object> assignBalanceToAccount(@PathVariable("id") Long id, @PathVariable("accountId") Long accountId){
+        balanceService.assignBalanceToAccount(id, accountId);
+        return ResponseEntity.noContent().build();
+    }
+
 }

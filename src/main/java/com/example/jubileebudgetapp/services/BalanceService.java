@@ -1,22 +1,28 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.BalanceDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
+import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Balance;
+import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.BalanceRepository;
 import com.example.jubileebudgetapp.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Service
 public class BalanceService {
 
     private BalanceRepository balanceRepository;
     private final TransactionRepository transactionRepository;
+    private final AccountRepository accountRepository;
 
-    public BalanceService(BalanceRepository balanceRepository, TransactionRepository transactionRepository) {
+    public BalanceService(BalanceRepository balanceRepository, TransactionRepository transactionRepository, AccountRepository accountRepository) {
         this.balanceRepository = balanceRepository;
         this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
     }
 
     public BalanceDto createBalance(BalanceDto balanceDto){
@@ -69,5 +75,19 @@ public class BalanceService {
         return balanceDto;
     }
 
+    public void assignBalanceToAccount(Long id, Long accountId) {
+        Optional<Balance> optionalBalance = balanceRepository.findById(id);
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+        if (optionalBalance.isPresent() && optionalAccount.isPresent()){
+            var balance = optionalBalance.get();
+            var account = optionalAccount.get();
+
+            balance.setAccount(account);
+            balanceRepository.save(balance);
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
 
 }

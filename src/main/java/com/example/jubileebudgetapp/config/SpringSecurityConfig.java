@@ -72,6 +72,8 @@ public class SpringSecurityConfig {
 
                 // balance
                 .requestMatchers(HttpMethod.POST, "/balances").denyAll()
+                .requestMatchers(HttpMethod.PUT, "/balances/{id}/{accountId}").hasAnyRole("ADMIN", "USER")
+
                 .requestMatchers(HttpMethod.GET, "/balances/calculate-total-income").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/balances/calculate-total-expense").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/balances/calculate-total-balance").hasRole("ADMIN")

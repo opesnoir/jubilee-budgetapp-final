@@ -1,5 +1,6 @@
 package com.example.jubileebudgetapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,5 +30,10 @@ public class Balance {
 
     @OneToMany(mappedBy = "balance")
     private List<Transaction> transactionList;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
 }
