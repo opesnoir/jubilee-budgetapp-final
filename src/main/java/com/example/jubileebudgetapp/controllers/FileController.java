@@ -57,6 +57,12 @@ public class FileController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}/{accountId}")
+    public ResponseEntity<Object> assignFileToAccount(@PathVariable("id") Long id, @PathVariable("accountId") Long accountId){
+        fileService.assignFileToAccount(id, accountId);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 

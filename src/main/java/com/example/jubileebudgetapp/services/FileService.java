@@ -1,8 +1,10 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.FileDto;
+import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.exceptions.UnsupportedFileTypeException;
 import com.example.jubileebudgetapp.exceptions.UploadedFileNotFoundException;
+import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.File;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.FileRepository;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Objects;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class FileService {
@@ -97,6 +100,21 @@ public class FileService {
         fileDto.setFileName(fileName);
 
         return fileDto;
+    }
+
+    public void assignFileToAccount(Long id, Long accountId){
+        Optional<File> optionalFile = fileRepository.findById(id);
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+        if (optionalFile.isPresent() && optionalAccount.isPresent()){
+            var contract = optionalFile.get();
+            var account = optionalAccount.get();
+
+            contract.setAccount(account);
+            fileRepository.save(contract);
+        } else {
+            throw new RecordNotFoundException();
+        }
     }
 
 }
