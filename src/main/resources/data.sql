@@ -16,8 +16,8 @@ INSERT INTO authorities (username, authority) VALUES ('Donald12', 'ROLE_USER');
 
 -- accounts
 INSERT INTO accounts (firstname, lastname, date_created, user_username) VALUES ('Karel', 'Appel', CURRENT_TIMESTAMP, 'AdminAppel!');
-INSERT INTO accounts (firstname, lastname, date_created, user_username) VALUES ('Asterix', 'de Gallier', CURRENT_TIMESTAMP, 'Astrix!');
-INSERT INTO accounts (firstname, lastname, date_created, user_username) VALUES ('Donald', 'Duck', CURRENT_TIMESTAMP, 'Donald12');
+INSERT INTO accounts (balance, firstname, lastname, date_created, user_username) VALUES (203.00, 'Asterix', 'de Gallier', CURRENT_TIMESTAMP, 'Astrix!');
+INSERT INTO accounts (balance, firstname, lastname, date_created, user_username) VALUES (450.00, 'Donald', 'Duck', CURRENT_TIMESTAMP, 'Donald12');
 
 -- contracts
 INSERT INTO contracts (payee, type, start_date, end_date, amount, account_id)
