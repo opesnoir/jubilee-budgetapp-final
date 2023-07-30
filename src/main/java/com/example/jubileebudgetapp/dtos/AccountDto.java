@@ -27,8 +27,6 @@ public class AccountDto {
 
     private List<Transaction> transactionList;
     private List<SavingGoal> savingGoalList;
-    //TODO: bij verwijderen upload deze list er ook uit:
-    private List<Upload> uploadList;
     private List<File> fileList;
     private List<Contract> contractList;
 

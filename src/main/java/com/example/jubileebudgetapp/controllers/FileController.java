@@ -1,7 +1,6 @@
 package com.example.jubileebudgetapp.controllers;
 
 import com.example.jubileebudgetapp.dtos.FileDto;
-import com.example.jubileebudgetapp.dtos.UploadDto;
 import com.example.jubileebudgetapp.exceptions.UploadedFileNotFoundException;
 import com.example.jubileebudgetapp.services.FileService;
 import org.springframework.core.io.Resource;
@@ -52,7 +51,7 @@ public class FileController {
     }
 
     @DeleteMapping("/{fileId}")
-    public ResponseEntity<UploadDto> deleteFile(@PathVariable("fileId") Long id) throws FileNotFoundException {
+    public ResponseEntity<FileDto> deleteFile(@PathVariable("fileId") Long id) throws FileNotFoundException {
         fileService.deleteFile(id);
         return ResponseEntity.noContent().build();
     }
@@ -62,9 +61,5 @@ public class FileController {
         fileService.assignFileToAccount(id, accountId);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
 
 }

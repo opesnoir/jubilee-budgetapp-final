@@ -106,19 +106,12 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.PATCH, "/transactions/{id}").hasRole("USER")
                 .requestMatchers(HttpMethod.DELETE, "/transactions/{id}").hasAnyRole("ADMIN", "USER")
 
-                // upload
-                .requestMatchers(HttpMethod.POST, "/uploads").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/uploads/{id}/download").hasRole("USER")
-                .requestMatchers(HttpMethod.DELETE, "/uploads/{id}").hasRole("USER")
-
                 // file
                 .requestMatchers(HttpMethod.POST, "/files/single/upload").hasRole("USER")
                 .requestMatchers(HttpMethod.PUT, "/files/{id}/{accountId}").hasAnyRole("ADMIN", "USER")
 
                 .requestMatchers(HttpMethod.GET, "/files/download/{fileId}").hasRole("USER")
                 .requestMatchers(HttpMethod.DELETE, "/files/{fileId}").hasRole("USER")
-
-
 
                 // authentication
                 .requestMatchers("/authenticated").authenticated()
