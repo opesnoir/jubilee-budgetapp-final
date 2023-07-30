@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 
 @RestController
+@RequestMapping("/files")
 public class FileController {
 
     private final FileService fileService;
