@@ -8,16 +8,13 @@ import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.FileRepository;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Objects;
 
 @Service
 public class FileService {
@@ -35,13 +32,8 @@ public class FileService {
         try {
             String contentType = file.getContentType();
 
-            switch (Objects.requireNonNull(contentType)){
-                case MediaType.APPLICATION_PDF_VALUE:
-                case MediaType.IMAGE_JPEG_VALUE:
-                case MediaType.IMAGE_PNG_VALUE:
-                    break;
-                default:
-                    throw new UnsupportedFileTypeException("Uploaded file must be a PDF, JPEG or PNG.");
+            if (!Objects.equals(contentType, MediaType.APPLICATION_PDF_VALUE)) {
+                throw new UnsupportedFileTypeException("Uploaded file must be a PDF.");
             }
 
             byte[] fileBytes = file.getBytes();
@@ -56,9 +48,9 @@ public class FileService {
         }
     }
 
-    public Resource downloadFile(Long id) throws UploadedFileNotFoundException {
-        File file =fileRepository.findById(id)
-                .orElseThrow(() -> new UploadedFileNotFoundException(id));
+    public Resource downloadFile(Long fileId) throws UploadedFileNotFoundException {
+        File file =fileRepository.findById(fileId)
+                .orElseThrow(() -> new UploadedFileNotFoundException(fileId));
 
         byte[] fileBytes = file.getUploadedFile();
         String fileName = file.getFileName();
@@ -71,9 +63,9 @@ public class FileService {
         };
     }
 
-    public void deleteFile(Long id) throws FileNotFoundException{
-        File file = fileRepository.findById(id)
-                .orElseThrow(() -> new FileNotFoundException("File not found with ID: " + id));
+    public void deleteFile(Long fileId) throws FileNotFoundException{
+        File file = fileRepository.findById(fileId)
+                .orElseThrow(() -> new FileNotFoundException("File not found with ID: " + fileId));
 
         fileRepository.delete(file);
     }
