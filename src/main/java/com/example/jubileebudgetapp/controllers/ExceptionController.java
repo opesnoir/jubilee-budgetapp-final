@@ -39,8 +39,8 @@ public class ExceptionController {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NO_CONTENT);
     }
 
-    @ExceptionHandler(value = UploadFileNotFoundException.class)
-    public ResponseEntity<String> exception(UploadFileNotFoundException exception){
+    @ExceptionHandler(value = UploadedFileNotFoundException.class)
+    public ResponseEntity<String> exception(UploadedFileNotFoundException exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 

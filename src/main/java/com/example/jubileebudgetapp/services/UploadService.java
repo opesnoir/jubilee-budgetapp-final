@@ -3,7 +3,7 @@ package com.example.jubileebudgetapp.services;
 import com.example.jubileebudgetapp.dtos.UploadDto;
 import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
 import com.example.jubileebudgetapp.exceptions.UnsupportedFileTypeException;
-import com.example.jubileebudgetapp.exceptions.UploadFileNotFoundException;
+import com.example.jubileebudgetapp.exceptions.UploadedFileNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Upload;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
@@ -52,9 +52,9 @@ public class UploadService {
         }
     }
 
-    public Resource downloadFile(Long id) throws UploadFileNotFoundException{
+    public Resource downloadFile(Long id) throws UploadedFileNotFoundException {
         Upload upload = uploadRepository.findById(id)
-                .orElseThrow(() -> new UploadFileNotFoundException(id));
+                .orElseThrow(() -> new UploadedFileNotFoundException(id));
 
         byte[] fileBytes = upload.getUpload();
         String fileName = upload.getFileName();

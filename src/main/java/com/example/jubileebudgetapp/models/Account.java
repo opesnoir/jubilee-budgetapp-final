@@ -20,7 +20,6 @@ import java.util.List;
 @Entity
 @Table(name = "accounts")
 public class Account {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,8 +36,12 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<SavingGoal> savingGoalList;
 
+    //TODO bij verwijderen upload deze relatie ook verwijderen
     @OneToMany(mappedBy = "account")
     private List<Upload> uploadList;
+
+    @OneToMany(mappedBy = "account")
+    private List<File> fileList;
 
     @OneToMany(mappedBy = "account")
     private List<Contract> contractList;

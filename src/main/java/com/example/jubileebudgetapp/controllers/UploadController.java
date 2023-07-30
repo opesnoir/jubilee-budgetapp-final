@@ -1,7 +1,7 @@
 package com.example.jubileebudgetapp.controllers;
 
 import com.example.jubileebudgetapp.dtos.UploadDto;
-import com.example.jubileebudgetapp.exceptions.UploadFileNotFoundException;
+import com.example.jubileebudgetapp.exceptions.UploadedFileNotFoundException;
 import com.example.jubileebudgetapp.services.UploadService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -38,7 +38,7 @@ public class UploadController {
     }
 
     @GetMapping("/{id}/download")
-    public ResponseEntity<Resource> downloadFile(@PathVariable("id") Long id) throws UploadFileNotFoundException {
+    public ResponseEntity<Resource> downloadFile(@PathVariable("id") Long id) throws UploadedFileNotFoundException {
         Resource fileResource = uploadService.downloadFile(id);
 
         HttpHeaders headers = new HttpHeaders();
