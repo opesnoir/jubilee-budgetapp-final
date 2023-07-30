@@ -2,12 +2,15 @@ package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.FileDto;
 import com.example.jubileebudgetapp.exceptions.UnsupportedFileTypeException;
+import com.example.jubileebudgetapp.exceptions.UploadedFileNotFoundException;
 import com.example.jubileebudgetapp.models.File;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.FileRepository;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,6 +54,21 @@ public class FileService {
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload file", e);
         }
+    }
+
+    public Resource downloadFile(Long id) throws UploadedFileNotFoundException {
+        File file =fileRepository.findById(id)
+                .orElseThrow(() -> new UploadedFileNotFoundException(id));
+
+        byte[] fileBytes = file.getUploadedFile();
+        String fileName = file.getFileName();
+
+        return new ByteArrayResource(fileBytes){
+            @Override
+            public String getFilename() {
+                return fileName;
+            }
+        };
     }
 
     //helper methods
