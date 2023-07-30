@@ -71,6 +71,13 @@ public class FileService {
         };
     }
 
+    public void deleteFile(Long id) throws FileNotFoundException{
+        File file = fileRepository.findById(id)
+                .orElseThrow(() -> new FileNotFoundException("File not found with ID: " + id));
+
+        fileRepository.delete(file);
+    }
+
     //helper methods
     public File convertDtoToFile(FileDto fileDto){
         File file = new File();
