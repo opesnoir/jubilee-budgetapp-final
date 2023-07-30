@@ -15,9 +15,9 @@ INSERT INTO authorities (username, authority) VALUES ('Astrix!', 'ROLE_USER');
 INSERT INTO authorities (username, authority) VALUES ('Donald12', 'ROLE_USER');
 
 -- accounts
-INSERT INTO accounts (firstname, lastname, user_username) VALUES ('Karel', 'Appel', 'AdminAppel!');
-INSERT INTO accounts (firstname, lastname, user_username) VALUES ('Asterix', 'de Gallier', 'Astrix!');
-INSERT INTO accounts (firstname, lastname, user_username) VALUES ('Donald', 'Duck', 'Donald12');
+INSERT INTO accounts (firstname, lastname, date_created, user_username) VALUES ('Karel', 'Appel', CURRENT_TIMESTAMP, 'AdminAppel!');
+INSERT INTO accounts (firstname, lastname, date_created, user_username) VALUES ('Asterix', 'de Gallier', CURRENT_TIMESTAMP, 'Astrix!');
+INSERT INTO accounts (firstname, lastname, date_created, user_username) VALUES ('Donald', 'Duck', CURRENT_TIMESTAMP, 'Donald12');
 
 -- contracts
 INSERT INTO contracts (payee, type, start_date, end_date, amount, account_id)
@@ -56,6 +56,6 @@ VALUES (500.00, 'work', '2023-08-28', 'working for Dagobert Duck', 'Dagobert Duc
 INSERT INTO balances (total_expense, total_income, balance)
 VALUES (57.00, 250.00, 203.00)
 
--- uploads
+-- file
 
 
