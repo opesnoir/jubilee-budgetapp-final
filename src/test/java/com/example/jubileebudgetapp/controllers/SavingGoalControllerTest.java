@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
 class SavingGoalControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -57,7 +56,6 @@ class SavingGoalControllerTest {
 
         savingGoalDto1 = new SavingGoalDto(savingGoal1.getId(), "holiday", "holiday trip to Bora Bora", BigDecimal.valueOf(1000), BigDecimal.valueOf(2500), savingGoalStatus.ACTIVE, account1);
         savingGoalDto2 = new SavingGoalDto(savingGoal2.getId(), "bike repair", "repairing bike and replacing tire", BigDecimal.valueOf(25), BigDecimal.valueOf(85), savingGoalStatus.COMPLETED, account1);
-
     }
 
     @Test

@@ -25,7 +25,6 @@ public class FileService {
     private final FileRepository fileRepository;
     private final AccountRepository accountRepository;
 
-
     public FileService(FileRepository fileRepository, AccountRepository accountRepository) {
         this.fileRepository = fileRepository;
         this.accountRepository = accountRepository;

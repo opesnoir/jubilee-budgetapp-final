@@ -1,11 +1,9 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.ContractDto;
-import com.example.jubileebudgetapp.dtos.SavingGoalDto;
 import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.Contract;
-import com.example.jubileebudgetapp.models.SavingGoal;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.ContractRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +28,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ContractServiceTest {
-
     @Mock
     ContractRepository contractRepository;
     @Mock

@@ -25,14 +25,16 @@ import java.time.LocalDate;
 @Setter
 
 public class TransactionDto {
-
     private Long id;
+
     @NotBlank(message = "Amount is required")
     @DecimalMin(value = "0.00", message = "Amount must be greater than or equal to 0.00")
     private BigDecimal amount;
+
     private String category;
     private LocalDate date;
     private String description;
+
     @NotBlank(message = "Payee is required")
     private String payee;
 
@@ -52,5 +54,4 @@ public class TransactionDto {
     private Long accountId;
 
     private Balance balance;
-
 }

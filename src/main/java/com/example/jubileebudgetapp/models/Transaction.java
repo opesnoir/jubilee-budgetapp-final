@@ -18,7 +18,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "transactions")
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,5 +41,4 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "balance_id")
     private Balance balance;
-
 }

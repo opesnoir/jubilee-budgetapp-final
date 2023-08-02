@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "saving_goals")
 public class SavingGoal {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,5 +34,4 @@ public class SavingGoal {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
-
 }

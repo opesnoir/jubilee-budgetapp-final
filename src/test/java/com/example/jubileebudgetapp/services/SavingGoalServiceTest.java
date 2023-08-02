@@ -30,7 +30,6 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SavingGoalServiceTest {
-
     @Mock
     SavingGoalRepository savingGoalRepository;
     @Mock
@@ -202,4 +201,5 @@ class SavingGoalServiceTest {
 
         verify(savingGoalRepository, never()).save(any(SavingGoal.class));
     }
+
 }

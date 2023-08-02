@@ -21,14 +21,14 @@ INSERT INTO accounts (balance, firstname, lastname, date_created, user_username)
 
 -- contracts
 INSERT INTO contracts (payee, type, start_date, end_date, amount, account_id)
-VALUES ('Gallië Nieuwsblad', 'maandblad', '2023-07-28', '2024-07-28', 50.00, 2);
+VALUES ('Gallië Paper', 'monthly paper', '2023-07-28', '2024-07-28', 50.00, 2);
 INSERT INTO contracts (payee, type, start_date, end_date, amount, account_id)
-VALUES ('Gallië Verzekeringen', 'Avonturenverzekering', '2023-07-28', '2024-07-28', 800.00, 2);
+VALUES ('Gallië Insurance', 'Adventure insurance', '2023-07-28', '2024-07-28', 800.00, 2);
 
 INSERT INTO contracts (payee, type, start_date, end_date, amount, account_id)
 VALUES ('Vitens', 'water contract', '2023-07-28', '2024-07-28', 100.00, 3);
 INSERT INTO contracts (payee, type, start_date, end_date, amount, account_id)
-VALUES ('Ecoplaza', 'duckfood', '2023-07-28', '2025-07-28', 150.00, 3);
+VALUES ('Ekoplaza', 'duck food', '2023-07-28', '2025-07-28', 150.00, 3);
 
 -- saving goals
 INSERT INTO saving_goals (current_amount, description, goal, status, target_amount, account_id)
@@ -51,11 +51,5 @@ INSERT INTO transactions (amount, category, date, description, payee, payment_me
 VALUES (50.00, 'groceries', '2023-07-28', 'buying fruit, vegetables and a cake', 'Ekoplaza, Duck Cakes', 'CASH','EXPENSE', 3);
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
 VALUES (500.00, 'work', '2023-08-28', 'working for Dagobert Duck', 'Dagobert Duck', 'BANK','INCOME', 3);
-
--- balance
-INSERT INTO balances (total_expense, total_income, balance)
-VALUES (57.00, 250.00, 203.00)
-
--- file
 
 

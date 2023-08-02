@@ -26,5 +26,4 @@ public class File {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
-
 }

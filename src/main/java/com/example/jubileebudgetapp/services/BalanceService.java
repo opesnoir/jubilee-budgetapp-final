@@ -69,5 +69,4 @@ public class BalanceService {
         return balanceDto;
     }
 
-
 }

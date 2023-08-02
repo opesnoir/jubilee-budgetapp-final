@@ -18,7 +18,6 @@ import java.util.List;
 @Entity
 @Table(name = "balances")
 public class Balance {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,5 +28,4 @@ public class Balance {
 
     @OneToMany(mappedBy = "balance")
     private List<Transaction> transactionList;
-
 }

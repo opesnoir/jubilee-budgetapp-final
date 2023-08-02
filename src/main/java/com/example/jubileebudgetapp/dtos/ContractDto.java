@@ -18,7 +18,6 @@ import java.time.LocalDate;
 @Setter
 
 public class ContractDto {
-
     private Long id;
     @NotNull(message = "Payee cannot be null")
     private String payee;
@@ -32,15 +31,4 @@ public class ContractDto {
     private Account account;
     private AccountDto accountDto;
     private Long accountId;
-
-    public ContractDto(Long id, String payee, String type, LocalDate startDate, LocalDate endDate, BigDecimal amount, Account account) {
-        this.id = id;
-        this.payee = payee;
-        this.type = type;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.amount = amount;
-        this.account = account;
-    }
-
 }

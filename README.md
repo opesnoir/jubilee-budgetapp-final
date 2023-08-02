@@ -49,7 +49,7 @@ Follow these steps to install and run the application locally:
 # Nederlands
 
 
-Dit project bevat de backend-implementatie van een financiële beheer applicatie, ontwikkeld als onderdeel van mijn backend bootcamp aan de Hogeschool Novi in Utrecht. Het biedt verschillende functionaliteiten, waaronder accountbeheer, balansweergave, file upload, transactietracking, opslag van spaardoelen en contract functionaliteit.
+Dit project bevat de backend-implementatie van een financiële beheer applicatie, ontwikkeld als onderdeel van mijn backend bootcamp aan de Hogeschool Novi in Utrecht. Het biedt verschillende functionaliteiten, waaronder accountbeheer, balansweergave, file upload, transactie-tracking, opslag van spaardoelen en contract functionaliteit.
 
 **Functionaliteiten**
 
@@ -82,5 +82,5 @@ Volg deze stappen om de applicatie lokaal te installeren en uit te voeren:
 1. Zorg ervoor dat Java 17 en Maven op je systeem zijn geïnstalleerd.
 2. Clone de repository naar je lokale machine.
 3. Navigeer naar de hoofdmap van het project.
-4. Voer het commando mvn spring-boot:run uit om de applicatie te starten.
+4. Voer het commando mvn spring-boot: run uit om de applicatie te starten.
 5. De applicatie wordt nu uitgevoerd op http://localhost:8080 (veronderstellend dat jouw PostgreSQL-database is geconfigureerd om op poort 5432 te draaien).

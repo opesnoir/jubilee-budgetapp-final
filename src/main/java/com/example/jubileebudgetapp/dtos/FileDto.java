@@ -15,7 +15,6 @@ import lombok.Setter;
 @Setter
 
 public class FileDto {
-
     private Long id;
     private String fileName;
 
@@ -26,12 +25,4 @@ public class FileDto {
     private Account account;
     private AccountDto accountDto;
     private Long accountId;
-
-    public FileDto(Long id, String fileName, byte[] uploadedFile, Account account) {
-        this.id = id;
-        this.fileName = fileName;
-        this.uploadedFile = uploadedFile;
-        this.account = account;
-    }
-
 }

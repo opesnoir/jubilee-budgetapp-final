@@ -18,7 +18,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @Column(nullable = false, unique = true)
     private String username;
@@ -53,5 +52,4 @@ public class User {
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
     }
-
 }
