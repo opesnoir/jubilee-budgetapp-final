@@ -43,13 +43,13 @@ VALUES (120.00, 'car reparation: new tires', 'car maintenance', 'COMPLETED', 120
 
 -- transactions
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
-VALUES (57.00, 'groceries', '2023-07-28', 'meat, potatoes and desserts', 'Supermarkt Galia', 'OTHER','EXPENSE', 2);
+VALUES (57.00, 'groceries', '2023-07-28', 'potatoes and desserts', 'Supermarkt Duck duck go', 'OTHER','EXPENSE', 2);
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
-VALUES (250.00, 'work', '2023-08-28', 'selling menhirs with Obelix', 'Obelix & Co', 'BANK','INCOME', 2);
+VALUES (250.00, 'work', '2023-08-28', 'selling feathers', 'Duck feathers & Co', 'BANK','INCOME', 2);
 
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
-VALUES (50.00, 'groceries', '2023-07-28', 'buying fruit, vegetables and a cake', 'Ekoplaza, Duck Cakes', 'CASH','EXPENSE', 3);
+VALUES (50.00, 'groceries', '2023-07-28', 'buying fruit, vegetables and a cake', 'Ekoplaza, Duck Cakes', 'CASH','EXPENSE', 2);
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
-VALUES (500.00, 'work', '2023-08-28', 'working for Dagobert Duck', 'Dagobert Duck', 'BANK','INCOME', 3);
+VALUES (500.00, 'work', '2023-08-28', 'working for Dagobert Duck', 'Dagobert Duck', 'BANK','INCOME', 2);
 
 
