@@ -1,6 +1,7 @@
 package com.example.jubileebudgetapp.services;
 
 import com.example.jubileebudgetapp.dtos.AccountDto;
+import com.example.jubileebudgetapp.dtos.BalanceDto;
 import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
 import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
@@ -86,6 +87,7 @@ public class AccountService {
         if (accountDto.getBalance() != null){
             account.setBalance(accountDto.getBalance());
         }
+
         return account;
     }
 

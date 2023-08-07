@@ -42,10 +42,16 @@ public class BalanceController {
         return ResponseEntity.ok(totalExpense);
     }
 
-    @GetMapping("/calculate-total-balance")
-    public ResponseEntity<BigDecimal> calculateBalance(){
-        BigDecimal totalBalance = balanceService.calculateBalance();
+    @GetMapping("/calculate-total-balance/{accountId}")
+    public ResponseEntity<BigDecimal> calculateBalance(@PathVariable("accountId") Long accountId){
+        BigDecimal totalBalance = balanceService.calculateBalance(accountId);
         return ResponseEntity.ok(totalBalance);
+    }
+
+    @PutMapping("/{id}/{accountId}")
+    public ResponseEntity<Object> assignBalanceToAccount(@PathVariable("id") Long id, @PathVariable("accountId") Long accountId){
+        balanceService.assignBalanceToAccount(id, accountId);
+        return ResponseEntity.noContent().build();
     }
 
 }

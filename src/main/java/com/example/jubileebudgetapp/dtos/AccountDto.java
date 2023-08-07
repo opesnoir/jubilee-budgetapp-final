@@ -31,4 +31,5 @@ public class AccountDto {
 
     @Valid
     private UserDto userDto;
+    private BalanceDto balanceDto;
 }

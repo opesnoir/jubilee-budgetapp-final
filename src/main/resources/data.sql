@@ -19,6 +19,10 @@ INSERT INTO accounts (firstname, lastname, date_created, user_username) VALUES (
 INSERT INTO accounts (balance, firstname, lastname, date_created, user_username) VALUES (203.00, 'Asterix', 'de Gallier', CURRENT_TIMESTAMP, 'Astrix!');
 INSERT INTO accounts (balance, firstname, lastname, date_created, user_username) VALUES (450.00, 'Donald', 'Duck', CURRENT_TIMESTAMP, 'Donald12');
 
+-- balances
+INSERT INTO balances (balance, total_expense, total_income, account_id)
+VALUES (643, 107, 750, 2);
+
 -- contracts
 INSERT INTO contracts (payee, type, start_date, end_date, amount, account_id)
 VALUES ('Gallië Paper', 'monthly paper', '2023-07-28', '2024-07-28', 50.00, 2);
