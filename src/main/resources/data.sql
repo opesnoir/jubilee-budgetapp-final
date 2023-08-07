@@ -62,4 +62,3 @@ INSERT INTO transactions (amount, category, date, description, payee, payment_me
 VALUES (50.00, 'groceries', '2023-07-28', 'buying fruit, vegetables and a cake', 'Ekoplaza, Duck Cakes', 'CASH','EXPENSE', 3);
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
 VALUES (500.00, 'work', '2023-08-28', 'working for Dagobert Duck', 'Dagobert Duck', 'BANK','INCOME', 3);
-

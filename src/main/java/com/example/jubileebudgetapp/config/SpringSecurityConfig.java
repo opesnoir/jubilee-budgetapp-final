@@ -71,7 +71,6 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/accounts/{id}").hasRole("ADMIN")
 
                 // balance
-                .requestMatchers(HttpMethod.POST, "/balances").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/balances/{accountId}").hasAnyRole("ADMIN", "USER")
 
                 // contract
