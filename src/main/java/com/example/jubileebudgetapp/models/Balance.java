@@ -22,8 +22,6 @@ public class Balance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal totalExpense;
-    private BigDecimal totalIncome;
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "balance")
