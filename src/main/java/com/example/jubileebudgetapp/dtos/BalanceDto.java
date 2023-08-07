@@ -19,12 +19,6 @@ import java.util.List;
 public class BalanceDto {
     private Long id;
 
-    @Min(value = 0)
-    private BigDecimal totalExpense;
-
-    @Min(value = 0)
-    private BigDecimal totalIncome;
     private BigDecimal balance;
-
     private List<Transaction> transactionList;
 }
