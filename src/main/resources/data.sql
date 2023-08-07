@@ -41,7 +41,7 @@ VALUES (150.00, 'water scooter for Katrien', 'birthday gift', 'ACTIVE', 250.00, 
 INSERT INTO saving_goals (current_amount, description, goal, status, target_amount, account_id)
 VALUES (120.00, 'car reparation: new tires', 'car maintenance', 'COMPLETED', 120.00, 3);
 
--- transactions account 2 Asterix
+-- transactions account 2 Asterix!
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
 VALUES (25.00, 'groceries', '2023-07-28', 'potatoes and meat', 'Supermarkt Galia', 'OTHER','EXPENSE', 2);
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
@@ -52,7 +52,7 @@ VALUES (30.00, 'groceries', '2023-07-28', 'buying fish', 'Ekoplaza, Galia', 'CAS
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
 VALUES (500.00, 'work', '2023-09-28', 'selling menhirs', 'Obelix & Co', 'BANK','INCOME', 2);
 
--- transactions account 3 Donald
+-- transactions account 3 Donald12
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
 VALUES (57.00, 'groceries', '2023-07-28', 'potatoes and desserts', 'Supermarkt Duck duck go', 'OTHER','EXPENSE', 3);
 INSERT INTO transactions (amount, category, date, description, payee, payment_method, type, account_id)
