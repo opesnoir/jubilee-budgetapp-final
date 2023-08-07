@@ -26,7 +26,4 @@ public class BalanceService {
         return transactionRepository.calculateBalanceForAccount(account);
     }
 
-
-
-
 }
