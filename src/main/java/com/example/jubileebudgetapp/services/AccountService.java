@@ -6,9 +6,11 @@ import com.example.jubileebudgetapp.exceptions.RecordNotFoundException;
 import com.example.jubileebudgetapp.models.Account;
 import com.example.jubileebudgetapp.models.User;
 import com.example.jubileebudgetapp.repositories.AccountRepository;
+import com.example.jubileebudgetapp.repositories.TransactionRepository;
 import com.example.jubileebudgetapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +21,12 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
+    private final TransactionRepository transactionRepository;
 
-    public AccountService(AccountRepository accountRepository, UserRepository userRepository) {
+    public AccountService(AccountRepository accountRepository, UserRepository userRepository, TransactionRepository transactionRepository) {
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     public List<AccountDto> getAccounts(){
@@ -70,8 +74,10 @@ public class AccountService {
         accountDto.setFirstname(account.getFirstname());
         accountDto.setLastname(account.getLastname());
         accountDto.setDateCreated(LocalDate.now());
+
+        BigDecimal balance = transactionRepository.calculateBalanceForAccount(account);
         if (account.getBalance() != null){
-            accountDto.setBalance(account.getBalance());
+            accountDto.setBalance(balance);
         }
 
         return accountDto;
@@ -83,9 +89,12 @@ public class AccountService {
         account.setFirstname(accountDto.getFirstname());
         account.setLastname(accountDto.getLastname());
         account.setDateCreated(LocalDate.now());
-        if (accountDto.getBalance() != null){
-            account.setBalance(accountDto.getBalance());
+
+        BigDecimal balance = accountDto.getBalance();
+        if (balance != null){
+            account.setBalance(balance);
         }
+
         return account;
     }
 
