@@ -1,8 +1,8 @@
 package com.example.jubileebudgetapp.services;
 
-import com.example.jubileebudgetapp.dtos.BalanceDto;
-import com.example.jubileebudgetapp.models.Balance;
-import com.example.jubileebudgetapp.repositories.BalanceRepository;
+import com.example.jubileebudgetapp.exceptions.AccountIdNotFoundException;
+import com.example.jubileebudgetapp.models.Account;
+import com.example.jubileebudgetapp.repositories.AccountRepository;
 import com.example.jubileebudgetapp.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,62 +11,22 @@ import java.math.BigDecimal;
 @Service
 public class BalanceService {
 
-    private BalanceRepository balanceRepository;
     private final TransactionRepository transactionRepository;
+    private final AccountRepository accountRepository;
 
-    public BalanceService(BalanceRepository balanceRepository, TransactionRepository transactionRepository) {
-        this.balanceRepository = balanceRepository;
+    public BalanceService(TransactionRepository transactionRepository, AccountRepository accountRepository) {
         this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
     }
 
-    public BalanceDto createBalance(BalanceDto balanceDto){
-        Balance balance = convertDtoToBalance(balanceDto);
-        balanceRepository.save(balance);
+    public BigDecimal getBalanceForAccount(Long accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new AccountIdNotFoundException(accountId));
 
-        return convertBalanceToDto(balance);
+        return transactionRepository.calculateBalanceForAccount(account);
     }
 
-    //helper methods
-    public BigDecimal calculateTotalIncome() {
-        return transactionRepository.calculateTotalIncome();
-    }
 
-    public BigDecimal calculateTotalExpense(){
-        return transactionRepository.calculateTotalExpense();
-    }
 
-    public BigDecimal calculateBalance(){
-        BigDecimal totalIncome = calculateTotalIncome();
-        BigDecimal totalExpense = calculateTotalExpense();
-
-        if (totalIncome == null) {
-            totalIncome = BigDecimal.ZERO;
-        }
-        if (totalExpense == null) {
-            totalExpense = BigDecimal.ZERO;
-        }
-        return totalIncome.subtract(totalExpense);
-    }
-
-    public Balance convertDtoToBalance(BalanceDto balanceDto){
-        Balance balance = new Balance();
-
-        balance.setTotalExpense(transactionRepository.calculateTotalExpense());
-        balance.setTotalIncome(transactionRepository.calculateTotalIncome());
-        balance.setBalance(calculateBalance());
-
-        return balance;
-    }
-
-    public BalanceDto convertBalanceToDto(Balance balance){
-        BalanceDto balanceDto = new BalanceDto();
-
-        balanceDto.setId(balance.getId());
-        balanceDto.setTotalExpense(transactionRepository.calculateTotalExpense());
-        balanceDto.setTotalIncome(transactionRepository.calculateTotalIncome());
-        balanceDto.setBalance(calculateBalance());
-
-        return balanceDto;
-    }
 
 }
